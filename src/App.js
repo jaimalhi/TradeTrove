@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import React from "react";
 import Login from './components/LoginPage/LoginPage';
 import LandingTemp from "./components/LandingTemp";
