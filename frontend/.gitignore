@@ -4,6 +4,9 @@ node_modules/
 # Ignore .env files
 .env
 
+# Ignore .vscode directory
+.vscode/
+
 # Ignore compiled files
 *.exe
 *.o
