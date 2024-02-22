@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import {createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../LoginPage/firebase";
 import './SignupPage.css';
+import { useNavigate } from 'react-router';
 function SignupPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,9 +25,26 @@ function SignupPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  async(e) => {
     e.preventDefault();
     console.log(formData);
+    await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            axios.put(`/login`,{
+               title:"Authenticated",
+               body: {token:user.getIdToken(),user:user}
+            })
+            navigate("/landingTemp");
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            alert("Something went wrong!")
+        });
   };
 
   return (
