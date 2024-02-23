@@ -1,6 +1,6 @@
 import React from 'react'
 import "./LandingPage.css";
-import landingPageImage from "../../Resources/Images/LandingImage.jpg";
+import landingPageImage from "../../Resources/Images/LandingImage.jpg"
 import { Link, NavLink} from 'react-router-dom';
 function LandingPage() {
   return (
