@@ -67,7 +67,7 @@
 }
 
 .submitButton {
-  background-color: #fbd493;
+  background-color: var(--medium-green);
   color: white;
   padding: 10px;
   cursor: pointer;
@@ -87,7 +87,7 @@
 }
 
 .googleButton {
-  background-color: #de5246;
+  background-color: var(--medium-green) ;
   color: white;
   padding: 10px;
   cursor: pointer;
