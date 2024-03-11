@@ -1,0 +1,29 @@
+.landingPage {
+    justify-content: center;
+    max-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+.landingPage_image {
+    width: 100%;
+    height: 140vh;
+    overflow: hidden;
+    position: fixed;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+.introductonContainer{
+    position:absolute ;
+    width:25%;
+    height:30%;
+    left:5%;
+    top:30%;
+    
+}
+.introParagraph {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--dark-green);
+}
+
+ 

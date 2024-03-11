@@ -1,20 +1,22 @@
 // import './App.css';
+import "./tailwind.css";
+import Navbar from "./components/Navbar/Narbar";
 import React from "react";
-import Login from './components/LoginPage/LoginPage';
-import SignUp from "./components/SignupPage";
-import LandingPage from "./components/LandingPage";
-import { BrowserRouter as Router, Switch, Route,Routes, Link } from "react-router-dom";
+import Login from "./components/LoginPage/LoginPage";
+import LandingPage from "./components/LandingPage/LandingPage";
+import SignupPage from "./components/SignupPage";
+import { BrowserRouter as Router, Switch, Route, Routes, Link } from "react-router-dom";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/SignUpPage" element={<SignUp />}></Route>
-        <Route path='/LoginPage' element={<Login />}></Route>
-      </Routes>
-    </Router>
-  );
+   return (
+      <Router>
+         <Routes>
+            <Route path="/" element={[<Navbar />, <LandingPage/>]}></Route>
+            <Route path="/login" element={[<Navbar />, <Login/>]}></Route>
+            <Route path="/signUp" element={[<Navbar />, <SignupPage/>]}></Route>
+         </Routes>
+      </Router>
+   );
 }
 
 export default App;
