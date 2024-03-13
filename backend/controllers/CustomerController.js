@@ -16,4 +16,26 @@ router.get("/", async (req, res) => {
    }
 });
 
+router.post("/signUp", async (req, res) => {
+  const {uid,email} = req.body.data.user;
+  const {password, phoneNumber, age, gender, isTradesperson, name} = req.body.data.form
+  try {
+    const signUpSuccess = await db.signUp(
+      uid,
+      email,
+      password,
+      phoneNumber,
+      age,
+      gender,
+      isTradesperson,
+      name
+    );
+    console.log("Sign up query finished successfully", signUpSuccess);
+    res.json(signUpSuccess);
+  } catch (err) {
+    console.error("Error signing in", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = router;

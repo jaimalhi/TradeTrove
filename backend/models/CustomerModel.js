@@ -8,6 +8,14 @@ async function getCustomers() {
    return customers;
 }
 
+//add customer to user table
+async function signUp(uid,email,password, phoneNumber, age, gender, isTradesperson, name) {
+   const q = "INSERT into users(uid,email,password,first_name,last_name,tradie) VALUES ($1,$2,$3,$4,$5,$6) RETURNING uid"
+   const uidAdded = await pool.query(q, [uid,email,password,name,"DEFAULT LAST NAME",isTradesperson])
+   console.log(uidAdded.rows[0]);
+   return uidAdded.rows[0].uid;
+}
+
 module.exports = {
-   getCustomers,
+   getCustomers, signUp
 };
