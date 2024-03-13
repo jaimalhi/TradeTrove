@@ -6,7 +6,7 @@ const customerRoutes = require("./controllers/customerController");
 const tradieRoutes = require("./controllers/tradieController");
 
 const app = express();
-const PORT = 3001;
+const PORT = 8080;
 
 // Middlewares
 app.use(express.json()); // parsing body
@@ -33,7 +33,7 @@ async function init() {
    await pool.query(jobsTable);
 }
 
-app.post("/logIn", async (req, res) => {
+app.post("/api/login", async (req, res) => {
    console.log("i am trying to sign in");
    const token = req.body.data.token;
    console.log(req.body.data.token);
