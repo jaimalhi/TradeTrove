@@ -33,11 +33,20 @@ function SignupPage() {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            axios.put(`/login`,{
-               title:"Authenticated",
-               body: {token:user.getIdToken(),user:user}
-            })
+            if(formData.isTradesperson){
+            axios.put(`/api/tradies/signUp`, {
+              title: "Authenticated",
+              body: { token: user.getIdToken(), user: user, form: formData },
+            });
             navigate("/landingTemp");
+         }
+         else {
+            axios.put(`/api/customers/signUp`, {
+              title: "Authenticated",
+              body: { token: user.getIdToken(), user: user },
+            });
+            navigate("/landingTemp");
+         }
         })
         .catch((error) => {
             const errorCode = error.code;
