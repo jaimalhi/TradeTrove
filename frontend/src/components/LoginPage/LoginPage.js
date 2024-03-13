@@ -27,11 +27,12 @@ const Login = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        axios.put(`/login`, {
-          title: "Authenticated",
-          body: { token: token, user: user },
-        });
-        navigate("/landingTemp");
+        // axios.get(`http://localhost:3001/logIn`, {
+        //   title: "Authenticated",
+        //   body: { token: token, user: user },
+        // });
+        console.log(user,token);
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -50,12 +51,23 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         const token = user.uid;
-        navigate("/landingTemp");
-        console.log(user);
-        axios.put(`/login`, {
-          title: "Authenticated",
-          body: { token: token, user: user },
-        });
+        axios
+          .post(`http://localhost:3001/logIn`, {
+            title: "Authenticated",
+            data: { token: token },
+          })
+          .then((response) => {
+            console.log(response.data);
+            if (response.data == true) {
+              navigate("/tradieViewJobs");
+            } else {
+              console.log(response);
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
