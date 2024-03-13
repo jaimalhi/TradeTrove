@@ -18,8 +18,28 @@ router.get("/", async (req, res) => {
 });
 
 // Sign up tradie
-router.get("/signUp", async (req,res) => {
-   console.log(req);
+router.post("/signUp", async (req,res) => {
+   console.log(req.body.data.form);
+   const { uid, email } = req.body.data.user;
+   const { password, phoneNumber, age, gender, isTradesperson, name } =
+     req.body.data.form;
+   try {
+     const signUpSuccess = await db.signUp(
+       uid,
+       email,
+       password,
+       phoneNumber,
+       age,
+       gender,
+       isTradesperson,
+       name
+     );
+     console.log("Sign up query for tradie finished successfully", signUpSuccess);
+     res.json(signUpSuccess);
+   } catch (err) {
+     console.error("Error signing in", err);
+     res.status(500).send("Internal Server Error");
+   }
 })
 
 module.exports = router;
