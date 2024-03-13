@@ -1,4 +1,4 @@
-//* Handles API endpoints for the customer view of the frontend
+//* Handles API endpoints for the tradie view of the frontend
 const express = require("express");
 const router = express.Router();
 const db = require("../models/tradieModel");

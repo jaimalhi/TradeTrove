@@ -1,4 +1,4 @@
-//* Handles the database queries for the customer view of the frontend
+//* Handles the database queries for the tradie view of the frontend
 const pool = require("../database");
 
 //* ======================= EXPORTED =======================
