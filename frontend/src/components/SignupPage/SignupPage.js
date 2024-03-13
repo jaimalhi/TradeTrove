@@ -47,88 +47,92 @@ function SignupPage() {
         });
   };
 
-  return (
-    <div className='signup_container'>
-      <h2>SignUp Page</h2>
-      <form className='signup_form' onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
 
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
+   return (
+      <div className="flex justify-center items-center h-screen bg-very-light-green">
+         <form onSubmit={handleSubmit} className="w-full max-w-xs">
+            <h2 className="text-center text-dark-green mb-6">Sign Up</h2>
+            <p className="text-medium-green mb-4">Please fill in this form to create an account!</p>
 
-        <label>
-          Confirm Password:
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </label>
+            <input
+               type="text"
+               id="name"
+               name="name"
+               placeholder="Name"
+               value={formData.name}
+               onChange={handleChange}
+               required
+               className="mb-4 px-3 py-2 rounded shadow w-full"
+            />
 
-        <label>
-          Phone Number:
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-          />
-        </label>
+            <input
+               type="email"
+               id="email"
+               name="email"
+               placeholder="Email"
+               value={formData.email}
+               onChange={handleChange}
+               required
+               className="mb-4 px-3 py-2 rounded shadow w-full"
+            />
 
-        <label>
-          Age:
-          <input
-            type="number"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-          />
-        </label>
+            <input
+               type="password"
+               id="password"
+               name="password"
+               placeholder="Password"
+               value={formData.password}
+               onChange={handleChange}
+               required
+               className="mb-4 px-3 py-2 rounded shadow w-full"
+            />
 
-        <label>
-          Gender:
-          <input
-            type="text"
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-          />
-        </label>
+            <input
+               type="password"
+               id="confirmPassword"
+               name="confirmPassword"
+               placeholder="Confirm Password"
+               value={formData.confirmPassword}
+               onChange={handleChange}
+               required
+               className="mb-4 px-3 py-2 rounded shadow w-full"
+            />
 
-        <label>
-          Are you a tradesperson?
-          <input
-            type="checkbox"
-            name="isTradesperson"
-            checked={formData.isTradesperson}
-            onChange={handleChange}
-          />
-        </label>
+            <div className="flex justify-around mb-4">
+               <span className="mb-2 block text-lg">Are you a Trades Person?</span>
+               <label className="inline-flex items-center">
+                  <input
+                     type="radio"
+                     name="isContractor"
+                     value="yes"
+                     checked={formData.isTradie === "yes"}
+                     onChange={handleChange}
+                     className="form-radio"
+                  />
+                  <span className="ml-2">Yes</span>
+               </label>
+               <label className="inline-flex items-center">
+                  <input
+                     type="radio"
+                     name="isContractor"
+                     value="no"
+                     checked={formData.isTradie === "no"}
+                     onChange={handleChange}
+                     className="form-radio"
+                  />
+                  <span className="ml-2">No</span>
+               </label>
+            </div>
 
+            <button
+               type="submit"
+               className="w-full bg-dark-green text-white py-2 rounded hover:bg-medium-green">
+               Sign Up
+            </button>
+         </form>
+      </div>
+   );
 
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  );
 }
 
 export default SignupPage;
