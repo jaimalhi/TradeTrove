@@ -1,8 +1,9 @@
 //* This file is the entry point of the application
 const express = require("express");
 let cors = require("cors");
-const customerRoutes = require("./controllers/customerController");
 const pool = require("./database");
+const customerRoutes = require("./controllers/customerController");
+const tradieRoutes = require("./controllers/tradieController");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use(cors());
 
 // Use routes from controllers
 app.use("/api/customers", customerRoutes);
+app.use("/api/tradies", tradieRoutes);
 
 // Initialize the database
 async function init() {
