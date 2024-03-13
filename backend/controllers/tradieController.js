@@ -5,6 +5,7 @@ const db = require("../models/tradieModel");
 
 //! ALL ENDPOINTS PREFIXED WITH /api/tradies AS DEFINED IN index.js
 
+
 // Get all customers (tradie=true)
 router.get("/", async (req, res) => {
    try {
@@ -15,5 +16,10 @@ router.get("/", async (req, res) => {
       res.status(500).send("Internal Server Error");
    }
 });
+
+// Sign up tradie
+router.get("/signUp", async (req,res) => {
+   console.log(req);
+})
 
 module.exports = router;
