@@ -48,7 +48,7 @@ const Login = () => {
             const user = userCredential.user;
             const token = user.uid;
             axios
-               .post(`${baseURL}/logIn`, {
+               .post(`${baseURL}/api/login`, {
                   title: "Authenticated",
                   data: { token: token },
                })
