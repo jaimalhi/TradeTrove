@@ -7,8 +7,8 @@ const db = require("../models/AuthModel");
 
 router.post("/login", async (req, res) => {
    // console.log("i am trying to sign in");
-   const token = req.body.data.token;
-   console.log(req.body.data.token);
+   const token = req.body.token;
+   // console.log(req.body.token);
 
    try {
       const isTradie = await db.login(token);
