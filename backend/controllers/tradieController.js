@@ -5,7 +5,6 @@ const db = require("../models/tradieModel");
 
 //! ALL ENDPOINTS PREFIXED WITH /api/tradies AS DEFINED IN index.js
 
-
 // Get all customers (tradie=true)
 router.get("/", async (req, res) => {
    try {
@@ -18,28 +17,28 @@ router.get("/", async (req, res) => {
 });
 
 // Sign up tradie
-router.post("/signUp", async (req,res) => {
+router.post("/signup", async (req, res) => {
    console.log(req.body.data.form);
    const { uid, email } = req.body.data.user;
-   const { password, phoneNumber, age, gender, isTradesperson, name } =
-     req.body.data.form;
+   const { password, phoneNumber, age, gender, isTradesperson, name } = req.body.data.form;
    try {
-     const signUpSuccess = await db.signUp(
-       uid,
-       email,
-       password,
-       phoneNumber,
-       age,
-       gender,
-       isTradesperson,
-       name
-     );
-     console.log("Sign up query for tradie finished successfully", signUpSuccess);
-     res.json(signUpSuccess);
+      //! Need to match data to the database schema
+      const signUpSuccess = await db.signUp(
+         uid,
+         email,
+         password,
+         phoneNumber,
+         age,
+         gender,
+         isTradesperson,
+         name
+      );
+      console.log("Sign up query for tradie finished successfully", signUpSuccess);
+      res.json(signUpSuccess);
    } catch (err) {
-     console.error("Error signing in", err);
-     res.status(500).send("Internal Server Error");
+      console.error("Error signing in", err);
+      res.status(500).send("Internal Server Error");
    }
-})
+});
 
 module.exports = router;

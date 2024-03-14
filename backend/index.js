@@ -4,6 +4,7 @@ let cors = require("cors");
 const pool = require("./database");
 const customerRoutes = require("./controllers/customerController");
 const tradieRoutes = require("./controllers/tradieController");
+const authRoutes = require("./controllers/AuthController");
 
 const app = express();
 const PORT = 8080;
@@ -16,6 +17,7 @@ app.use(cors());
 // Use routes from controllers
 app.use("/api/customers", customerRoutes);
 app.use("/api/tradies", tradieRoutes);
+app.use("/api/auth", authRoutes);
 
 // Initialize the database
 async function init() {
@@ -32,17 +34,6 @@ async function init() {
    await pool.query(tradieTable);
    await pool.query(jobsTable);
 }
-
-app.post("/api/login", async (req, res) => {
-   console.log("i am trying to sign in");
-   const token = req.body.data.token;
-   console.log(req.body.data.token);
-   const getUser = "SELECT tradie from Users WHERE uid = $1";
-   const user = await pool.query(getUser, [token]);
-   const isTradie = user.rows[0].tradie;
-   console.log(user.rows[0].tradie);
-   res.status(200).json(isTradie);
-});
 
 // Initialize the database and start the server
 async function initDatabaseAndStartServer() {

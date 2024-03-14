@@ -23,7 +23,7 @@ const Login = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            // axios.get(`${baseURL}/logIn`, {
+            // axios.get(`${baseURL}/auth/login`, {
             //   title: "Authenticated",
             //   body: { token: token, user: user },
             // });
@@ -48,7 +48,7 @@ const Login = () => {
             const user = userCredential.user;
             const token = user.uid;
             axios
-               .post(`${baseURL}/api/login`, {
+               .post(`${baseURL}/api/auth/login`, {
                   title: "Authenticated",
                   data: { token: token },
                })

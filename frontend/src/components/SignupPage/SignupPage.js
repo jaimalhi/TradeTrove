@@ -38,7 +38,7 @@ function SignupPage() {
             console.log(user);
             if (formData.isTradesperson === "true") {
                axios
-                  .post(`${baseURL}/api/tradies/signUp`, {
+                  .post(`${baseURL}/api/tradies/signup`, {
                      title: "Authenticated",
                      data: { user: user, form: formData },
                   })
@@ -54,7 +54,7 @@ function SignupPage() {
                   });
             } else {
                const uidResponse = axios
-                  .post(`${baseURL}/api/customers/signUp`, {
+                  .post(`${baseURL}/api/customers/signup`, {
                      title: "Authenticated",
                      data: { user: user, form: formData },
                   })
