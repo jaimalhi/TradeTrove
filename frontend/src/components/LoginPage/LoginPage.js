@@ -54,7 +54,7 @@ const Login = () => {
                })
                .then((response) => {
                   console.log(response.data);
-                  if (response.data == true) {
+                  if (response.data === true) {
                      navigate("/tradieViewJobs");
                   } else {
                      console.log(response);
