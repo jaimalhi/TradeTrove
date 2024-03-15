@@ -4,9 +4,10 @@ let cors = require("cors");
 const pool = require("./database");
 const customerRoutes = require("./controllers/customerController");
 const tradieRoutes = require("./controllers/tradieController");
+const authRoutes = require("./controllers/AuthController");
 
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 // Middlewares
 app.use(express.json()); // parsing body
@@ -16,17 +17,18 @@ app.use(cors());
 // Use routes from controllers
 app.use("/api/customers", customerRoutes);
 app.use("/api/tradies", tradieRoutes);
+app.use("/api/auth", authRoutes);
 
 // Initialize the database
 async function init() {
    const usersTable =
-      "CREATE TABLE IF NOT EXISTS Users (uid SERIAL, email VARCHAR(255) UNIQUE, password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), tradie BOOLEAN, PRIMARY KEY (uid))";
+      "CREATE TABLE IF NOT EXISTS Users (uid VARCHAR(30) UNIQUE, email VARCHAR(255) UNIQUE, password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), tradie BOOLEAN, PRIMARY KEY (uid))";
 
    const tradieTable =
-      "CREATE TABLE IF NOT EXISTS Tradies (tid SERIAL, uid INTEGER UNIQUE, skills VARCHAR[], years_experience INT CHECK (years_experience >= 0), PRIMARY KEY (tid), FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE)";
+      "CREATE TABLE IF NOT EXISTS Tradies (tid SERIAL, uid VARCHAR(30) UNIQUE, skills VARCHAR[], years_experience INT CHECK (years_experience >= 0), PRIMARY KEY (tid), FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE)";
 
    const jobsTable =
-      "CREATE TABLE IF NOT EXISTS Jobs (jid SERIAL, uid INTEGER, trade_type VARCHAR(255), location VARCHAR(255), description TEXT, PRIMARY KEY (jid, uid), FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE)";
+      "CREATE TABLE IF NOT EXISTS Jobs (jid SERIAL, uid VARCHAR(30), trade_type VARCHAR(255), location VARCHAR(255), description TEXT, PRIMARY KEY (jid, uid), FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE)";
 
    await pool.query(usersTable);
    await pool.query(tradieTable);

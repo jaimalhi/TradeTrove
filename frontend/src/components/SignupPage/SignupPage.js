@@ -1,26 +1,82 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../LoginPage/firebase";
+import "./SignupPage.css";
+import { useNavigate } from "react-router";
+
+const baseURL = "http://localhost:8080";
 
 function SignupPage() {
+   var uid = "";
+   const navigate = useNavigate();
    const [formData, setFormData] = useState({
-      name: "",
       email: "",
       password: "",
       confirmPassword: "",
-      isTradie: "no",
+      phoneNumber: "",
+      age: "",
+      gender: "",
+      isTradesperson: false,
    });
 
    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevFormData) => ({
-         ...prevFormData,
+      const { name, value, type, checked } = e.target;
+      setFormData((prevData) => ({
+         ...prevData,
          [name]: value,
       }));
    };
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
-      // Handle form submission logic here
       console.log(formData);
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+         .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            if (formData.isTradesperson === "true") {
+               axios
+                  .post(`${baseURL}/api/tradies/signup`, {
+                     title: "Authenticated",
+                     data: { user: user, form: formData },
+                  })
+                  .then((uidResponse) => {
+                     if (uidResponse) {
+                        console.log("Successfully signed up the tradie!");
+                        uid = uidResponse;
+                        navigate("/tradieViewJobs");
+                     }
+                  })
+                  .catch((error) => {
+                     alert("Something went wrong!");
+                  });
+            } else {
+               const uidResponse = axios
+                  .post(`${baseURL}/api/customers/signup`, {
+                     title: "Authenticated",
+                     data: { user: user, form: formData },
+                  })
+                  .then((uidResponse) => {
+                     if (uidResponse) {
+                        console.log("Successfully signed up!");
+                        uid = uidResponse;
+                        navigate("/");
+                     }
+                  })
+                  .catch((error) => {
+                     alert("Something went wrong!");
+                     console.log(`Cant sign up ${error}`);
+                  });
+            }
+         })
+         .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            alert(`Something went wrong ${errorMessage}!`);
+         });
    };
 
    return (
@@ -78,9 +134,9 @@ function SignupPage() {
                <label className="inline-flex items-center">
                   <input
                      type="radio"
-                     name="isContractor"
-                     value="yes"
-                     checked={formData.isTradie === "yes"}
+                     name="isTradesperson"
+                     checked={formData.isTradesperson === "true"}
+                     value={true}
                      onChange={handleChange}
                      className="form-radio"
                   />
@@ -89,9 +145,9 @@ function SignupPage() {
                <label className="inline-flex items-center">
                   <input
                      type="radio"
-                     name="isContractor"
-                     value="no"
-                     checked={formData.isTradie === "no"}
+                     name="isTradesperson"
+                     checked={formData.isTradesperson === "false"}
+                     value={false}
                      onChange={handleChange}
                      className="form-radio"
                   />
