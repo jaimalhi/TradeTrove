@@ -7,7 +7,7 @@ const db = require("../models/AuthModel");
 
 router.post("/login", async (req, res) => {
    // console.log("i am trying to sign in");
-   const token = req.body.token;
+   const token = req.body.data.token;
    // console.log(req.body.token);
 
    try {
