@@ -20,10 +20,17 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={[<Navbar />, <TradieServicesPage />]}></Route>
+        <Route path="/" element={[<Navbar />, <LandingPage />]}></Route>
         <Route path="/login" element={[<Navbar />, <Login />]}></Route>
         <Route path="/signUp" element={[<Navbar />, <SignupPage />]}></Route>
-        <Route path="/tradieViewJobs" element={[<Navbar />, <ViewJobsPage />]}></Route>
+        <Route
+          path="/tradieViewJobs"
+          element={[<Navbar />, <ViewJobsPage />]}
+        ></Route>
+        <Route
+          path="/tradieServicesPage"
+          element={[<Navbar />, <TradieServicesPage />]}
+        ></Route>
       </Routes>
     </Router>
   );

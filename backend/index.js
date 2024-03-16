@@ -5,6 +5,7 @@ const pool = require("./database");
 const customerRoutes = require("./controllers/customerController");
 const tradieRoutes = require("./controllers/tradieController");
 const authRoutes = require("./controllers/AuthController");
+var cookieParser = require("cookie-parser");
 
 const app = express();
 const PORT = 8080;
@@ -12,7 +13,10 @@ const PORT = 8080;
 // Middlewares
 app.use(express.json()); // parsing body
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+   origin:"http://localhost:3000",
+   credentials:true}));
 
 // Use routes from controllers
 app.use("/api/customers", customerRoutes);
