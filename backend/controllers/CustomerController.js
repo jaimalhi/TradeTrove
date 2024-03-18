@@ -16,6 +16,17 @@ router.get("/", async (req, res) => {
    }
 });
 
+// Get all jobs for customers (tradie=false)
+router.get("/jobs", async (req, res) => {
+   try {
+      const jobs = await db.getCustomerJobs();
+      res.json(jobs);
+   } catch (err) {
+      console.error("Error getting customer jobs:", err);
+      res.status(500).send("Internal Server Error");
+   }
+});
+
 router.post("/signup", async (req, res) => {
    const { uid, email } = req.body.data.user;
    const { password, phoneNumber, age, gender, isTradesperson, name } = req.body.data.form;
@@ -31,15 +42,15 @@ router.post("/signup", async (req, res) => {
          isTradesperson,
          name
       );
-       res.header("Access-Control-Allow-Credentials", "true");
-       res.cookie("uid", uid, {
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.cookie("uid", uid, {
          httpOnly: false,
          path: "/",
-       });
-       res.cookie("isTradie", false, {
+      });
+      res.cookie("isTradie", false, {
          httpOnly: false,
          path: "/",
-       });
+      });
       console.log("Sign up query finished successfully", signUpSuccess);
       res.json(signUpSuccess);
    } catch (err) {
