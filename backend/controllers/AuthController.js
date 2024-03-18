@@ -12,7 +12,17 @@ router.post("/login", async (req, res) => {
 
    try {
       const isTradie = await db.login(token);
+      res.header("Access-Control-Allow-Credentials", "true"); 
+      res.cookie("uid", token, {
+        httpOnly: false,
+        path: "/",
+      });
+      res.cookie("isTradie", isTradie, {
+        httpOnly: false,
+        path: "/",
+      });
       res.status(200).json(isTradie);
+      // res.send("cookie");
    } catch (err) {
       console.error("Error getting tradie status:", err);
       res.status(500).send("Internal Server Error");

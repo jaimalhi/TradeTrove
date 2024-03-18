@@ -6,6 +6,8 @@ import Login from "./components/LoginPage/LoginPage";
 import LandingPage from "./components/LandingPage/LandingPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 import ViewJobsPage from "./components/ViewJobsPage/ViewJobsPage";
+import TradieServicesPage from "./components/TradieServicesPage/TradieServicesPage";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,7 +23,14 @@ function App() {
         <Route path="/" element={[<Navbar />, <LandingPage />]}></Route>
         <Route path="/login" element={[<Navbar />, <Login />]}></Route>
         <Route path="/signUp" element={[<Navbar />, <SignupPage />]}></Route>
-        <Route path="/tradieViewJobs" element={[<Navbar />, <ViewJobsPage />]}></Route>
+        <Route
+          path="/tradieViewJobs"
+          element={[<Navbar />, <ViewJobsPage />]}
+        ></Route>
+        <Route
+          path="/tradieServicesPage"
+          element={[<Navbar />, <TradieServicesPage />]}
+        ></Route>
       </Routes>
     </Router>
   );

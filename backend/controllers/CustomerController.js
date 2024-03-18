@@ -31,6 +31,15 @@ router.post("/signup", async (req, res) => {
          isTradesperson,
          name
       );
+       res.header("Access-Control-Allow-Credentials", "true");
+       res.cookie("uid", uid, {
+         httpOnly: false,
+         path: "/",
+       });
+       res.cookie("isTradie", false, {
+         httpOnly: false,
+         path: "/",
+       });
       console.log("Sign up query finished successfully", signUpSuccess);
       res.json(signUpSuccess);
    } catch (err) {
