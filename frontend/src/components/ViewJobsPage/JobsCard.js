@@ -7,8 +7,6 @@ function JobsCard(props) {
    // const info = "I think there is something dead inside my faucet which is ruining my faucet experience."
    // const pincode = "V5A 1B2"
    // const date = "Sat, Feb 24"
-   //! Jobs should have visible attributes jid, trade_type, description, & location
-   //! location should be displayed using lat, long coordinates; ex. 49.282, 123.120
    const jobName = props.name;
    const info = props.info;
    const pincode = props.pincode;

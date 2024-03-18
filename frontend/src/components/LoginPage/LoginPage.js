@@ -48,32 +48,32 @@ const Login = () => {
             const user = userCredential.user;
             const token = user.uid;
             axios
-              .post(
-                `${baseURL}/api/auth/login`,
-                {
-                  title: "Authenticated",
-                  data: { token: token },
-                },
-                {
-                  withCredentials: true,
-                  headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
+               .post(
+                  `${baseURL}/api/auth/login`,
+                  {
+                     title: "Authenticated",
+                     data: { token: token },
                   },
-                }
-              )
-              .then((response) => {
-                console.log(response.data);
-                if (response.data === true) {
-                  navigate("/tradieViewJobs");
-                } else {
-                  console.log(response);
-                  navigate("/");
-                }
-              })
-              .catch((error) => {
-                console.error("Error:", error);
-              });
+                  {
+                     withCredentials: true,
+                     headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Content-Type": "application/json",
+                     },
+                  }
+               )
+               .then((response) => {
+                  console.log(response.data);
+                  if (response.data === true) {
+                     navigate("/tradie/jobs");
+                  } else {
+                     console.log(response);
+                     navigate("/");
+                  }
+               })
+               .catch((error) => {
+                  console.error("Error:", error);
+               });
          })
          .catch((error) => {
             const errorCode = error.code;
