@@ -40,6 +40,10 @@ router.post("/signup", async (req, res) => {
          httpOnly: false,
          path: "/",
        });
+       res.cookie("loggedIn", true, {
+         httpOnly: false,
+         path: "/",
+       });
       console.log("Sign up query finished successfully", signUpSuccess);
       res.json(signUpSuccess);
    } catch (err) {

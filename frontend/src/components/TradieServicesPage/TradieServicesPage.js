@@ -8,12 +8,12 @@ const baseURL = "http://localhost:8080";
 
 function TradieServicesPage() {
   const placeholderTradie = {
-    first_name: "James",
-    last_name: "John",
-    email: "example@demo.com",
+    first_name: "",
+    last_name: "",
+    email: "",
     passsword: "",
-    skills: ["plumbing", "cleaning", "mounting tv", "fixing shower"],
-    years_experience: "0",
+    skills: [],
+    years_experience: "",
   };
 
   const [tradieInfo, setTradieInfo] = useState(placeholderTradie);
