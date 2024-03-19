@@ -6,6 +6,12 @@ async function getUserById(uid) {
    return res.rows[0];
 }
 
+async function getJobsByUserId(uid) {
+   const res = await pool.query("SELECT * FROM jobs WHERE uid=$1", [uid]);
+   return res.rows;
+}
+
 module.exports = {
    getUserById,
+   getJobsByUserId,
 };

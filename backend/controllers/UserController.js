@@ -21,4 +21,16 @@ router.get("/:uid", async (req, res) => {
    }
 });
 
+// Get all jobs for a user by their uid
+router.get("/:uid/jobs", async (req, res) => {
+   const { uid } = req.params;
+   try {
+      const jobs = await db.getJobsByUserId(uid);
+      res.json(jobs);
+   } catch (err) {
+      console.error("Error getting jobs by user id:", err);
+      res.status(500).send("Internal Server Error");
+   }
+});
+
 module.exports = router;
