@@ -29,7 +29,7 @@ function ViewTradies() {
             <div className="w-full max-w-2xl">
                 {tradies.length > 0 ? (
                     tradies.map((tradie) => (
-                        <div key={tradie.uid} className="bg-very-light-green p-4 rounded-lg shadow-md mb-6">
+                        <div key={tradie.uid} className="bg-white p-4 rounded-lg shadow-md mb-6">
                             <h3 className="text-xl font-semibold mb-2">{tradie.first_name} {tradie.last_name}</h3>
                             <p className="mb-1">Email: <span className="font-medium">{tradie.email}</span></p>
                             <p className="mb-1">Phone: <span className="font-medium">{tradie.phone_num}</span></p>
