@@ -1,56 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import JobsCard from "./JobsCard";
+import axios from "axios";
+import SearchBar from "./SearchBar";
+
+const SERVER_URL = 'http://localhost:8080'; //change after hosting
+async function getJobs() {
+
+   const res = await axios.get(`${SERVER_URL}/api/tradies/jobs`)
+
+   return res.data;
+
+}
 
 function ViewJobsPage() {
-   //! Jobs should have visible attributes jid, trade_type, description, & location
-   //! location should be displayed using lat, long coordinates; ex. 49.282, 123.120
-   //! Date is not required as it is not a attribute that exists in the database table
-   const jobs = [
-      {
-         name: "Fix faucet",
-         info: "I think there is something dead inside my faucet which is ruining my faucet experience.",
-         pincode: "V5A 1B2",
-         date: "Sat, Feb 24",
-         id: 1,
-      },
-      {
-         name: "Fix faucet",
-         info: "I think there is something dead inside my faucet which is ruining my faucet experience.",
-         pincode: "V5A 1B2",
-         date: "Sat, Feb 24",
-         id: 2,
-      },
-      {
-         name: "Fix faucet",
-         info: "I think there is something dead inside my faucet which is ruining my faucet experience.",
-         pincode: "V5A 1B2",
-         date: "Sat, Feb 24",
-         id: 3,
-      },
-      {
-         name: "Fix faucet",
-         info: "I think there is something dead inside my faucet which is ruining my faucet experience.",
-         pincode: "V5A 1B2",
-         date: "Sat, Feb 24",
-         id: 4,
-      },
-      {
-         name: "Fix faucet",
-         info: "I think there is something dead inside my faucet which is ruining my faucet experience.",
-         pincode: "V5A 1B2",
-         date: "Sat, Feb 24",
-         id: 5,
-      },
-   ];
+
+   const [jobs, setJobs] = useState([]);
+   const [filteredJobs, setFilteredJobs] = useState([]);
+   const [searchTerm, setSearchTerm] = useState("");
+
+   useEffect(() => {
+      async function fetchData() {
+         try {
+            const res = await getJobs();
+
+            setJobs(res);
+            setFilteredJobs(res);
+
+         }
+         catch (err) { console.log(err) }
+      }
+      fetchData();
+
+   }, []);
+
+
+   useEffect(() => {
+      setFilteredJobs(() => jobs.filter((j) => j.trade_type.toLowerCase().includes(searchTerm.toLowerCase()) || j.description.toLowerCase().includes(searchTerm.toLowerCase()) || j.location.toLowerCase().includes(searchTerm.toLowerCase()) || !searchTerm))
+   }, [searchTerm]);
    return (
       <div>
-         {jobs.map((job) => (
+         <SearchBar
+            searchTerm={searchTerm}
+            onSearchTermChange={setSearchTerm}
+
+         />
+         {filteredJobs.map((job) => (
             <JobsCard
-               key={job.id}
-               name={job.name}
-               info={job.info}
-               pincode={job.pincode}
-               date={job.pincode}
+               key={job.jid}
+               name={job.trade_type}
+               info={job.description}
+               pincode={job.location}
+               date={new Date().toDateString()}
             />
          ))}
       </div>

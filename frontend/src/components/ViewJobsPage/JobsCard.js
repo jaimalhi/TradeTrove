@@ -14,14 +14,17 @@ function JobsCard(props) {
    const pincode = props.pincode;
    const date = props.date;
    return (
-      <div class="p-4 mx-auto mt-8 max-w-screen-lg bg-white rounded-xl shadow-md ">
-         <div class="flex flex-row gap-x-5">
-            <img src={LandingImage} class="w-60 h-60 rounded-xl" alt="job-iamge" />
-            <div class="flex flex-col p-3 space-y-5">
-               <h1 class="text-4xl subpixel-antialiased font-semibold">{jobName}</h1>
-               <p class="text-3xl">{info}</p>
-               <p class="text-2xl">{pincode}</p>
-               <p class="text-2xl">Service needed on: {date}</p>
+      <div>
+
+         <div class="p-4 mx-auto mt-8 max-w-screen-lg bg-white rounded-xl shadow-md pt-16">
+            <div class="flex flex-row gap-x-5">
+               <img src={LandingImage} class="w-60 h-60 rounded-xl" alt="job-iamge" />
+               <div class="flex flex-col p-3 space-y-5">
+                  <h1 class="text-4xl subpixel-antialiased font-semibold">{jobName}</h1>
+                  <p class="text-3xl">{info}</p>
+                  <p class="text-2xl">{pincode}</p>
+                  <p class="text-2xl">Service needed on: {date}</p>
+               </div>
             </div>
          </div>
       </div>
