@@ -6,8 +6,11 @@ import "../../index.css";
 import Cookies from "js-cookie";
 
 function LandingPage() {
-
-  const isLoggedIn = Cookies.get("loggedIn");
+  const loggedCookie = Cookies.get("loggedIn");
+  var isLoggedIn = loggedCookie; 
+  if(loggedCookie == null){
+   isLoggedIn = "false";
+  }
 
 
   return (
