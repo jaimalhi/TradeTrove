@@ -48,24 +48,14 @@ const Login = () => {
             const user = userCredential.user;
             const token = user.uid;
             axios
-               .post(
-                  `${baseURL}/api/auth/login`,
-                  {
-                     title: "Authenticated",
-                     data: { token: token },
-                  },
-                  {
-                     withCredentials: true,
-                     headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        "Content-Type": "application/json",
-                     },
-                  }
-               )
+               .post(`${baseURL}/api/auth/login`, {
+                  title: "Authenticated",
+                  data: { token: token },
+               })
                .then((response) => {
                   console.log(response.data);
                   if (response.data === true) {
-                     navigate("/tradie/jobs");
+                     navigate("/tradieViewJobs");
                   } else {
                      console.log(response);
                      navigate("/");

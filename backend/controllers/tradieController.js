@@ -29,36 +29,44 @@ router.get("/jobs", async (req, res) => {
 
 // Sign up tradie
 router.post("/signup", async (req, res) => {
-   console.log(req.body.data.form);
-   const { uid, email } = req.body.data.user;
-   const { password, phoneNumber, age, gender, isTradesperson, name } = req.body.data.form;
-   try {
-      //! Need to match data to the database schema
-      const signUpSuccess = await db.signUp(
-         uid,
-         email,
-         password,
-         phoneNumber,
-         age,
-         gender,
-         isTradesperson,
-         name
-      );
-      console.log("Sign up query for tradie finished successfully", signUpSuccess);
-      res.header("Access-Control-Allow-Credentials", "true");
-      res.cookie("uid", uid, {
-         httpOnly: false,
-         path: "/",
-      });
-      res.cookie("isTradie", true, {
-         httpOnly: true,
-         path: "/",
-      });
-      res.json(signUpSuccess);
-   } catch (err) {
-      console.error("Error signing in", err);
-      res.status(500).send("Internal Server Error");
-   }
+  console.log(req.body.data.form);
+  const { uid, email } = req.body.data.user;
+  const { password, phoneNumber, age, gender, isTradesperson, name } =
+    req.body.data.form;
+  try {
+    //! Need to match data to the database schema
+    const signUpSuccess = await db.signUp(
+      uid,
+      email,
+      password,
+      phoneNumber,
+      age,
+      gender,
+      isTradesperson,
+      name
+    );
+    console.log(
+      "Sign up query for tradie finished successfully",
+      signUpSuccess
+    );
+     res.header("Access-Control-Allow-Credentials", "true");
+     res.cookie("uid", uid, {
+       httpOnly: false,
+       path: "/",
+     });
+     res.cookie("isTradie", true, {
+       httpOnly: true,
+       path: "/",
+     });
+     res.cookie("loggedIn", true, {
+       httpOnly: false,
+       path: "/",
+     });
+    res.json(signUpSuccess);
+  } catch (err) {
+    console.error("Error signing in", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 //Get tradie with uid
