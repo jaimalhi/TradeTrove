@@ -27,6 +27,26 @@ router.get("/jobs", async (req, res) => {
    }
 });
 
+// create job as a customer
+router.post("/create-job", async (req, res) => {
+   const { uid, trade_type, postalCode, description, date, title, imageData } = req.body;
+   try {
+      const job = await db.createJob(
+         uid,
+         trade_type,
+         postalCode,
+         description,
+         date,
+         title,
+         imageData
+      );
+      res.json(job);
+   } catch (err) {
+      console.error("Error creating job:", err);
+      res.status(500).send("Internal Server Error");
+   }
+});
+
 router.post("/signup", async (req, res) => {
    const { uid, email } = req.body.data.user;
    const { password, phoneNumber, age, gender, isTradesperson, name } = req.body.data.form;

@@ -32,8 +32,30 @@ async function signUp(uid, email, password, phoneNumber, age, gender, isTradespe
    return uidAdded.rows[0].uid;
 }
 
+//add job to jobs table
+async function createJob(uid, trade_type, postalCode, description, date, title, imageData) {
+   // insert image into images table and get image_id
+   const imageQuery = "INSERT INTO images(title, data) VALUES ($1,$2) RETURNING image_id";
+   const imageId = await pool.query(imageQuery, [title, imageData]);
+
+   // insert all into jobs table
+   const q =
+      "INSERT INTO jobs(uid, trade_type, postal_code, description, date, image) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *";
+   const job = await pool.query(q, [
+      uid,
+      trade_type,
+      postalCode,
+      description,
+      date,
+      imageId.rows[0].image_id,
+   ]);
+
+   return job.rows[0];
+}
+
 module.exports = {
    getCustomers,
    getCustomerJobs,
    signUp,
+   createJob,
 };
