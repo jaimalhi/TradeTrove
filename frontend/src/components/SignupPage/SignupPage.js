@@ -62,7 +62,7 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
                 uid = uidResponse;
                 handleLoginCookie();
                 handleTradieCookie("true");
-                navigate("/tradieViewJobs");
+                navigate("/tradie/jobs");
               }
             })
             .catch((error) => {
