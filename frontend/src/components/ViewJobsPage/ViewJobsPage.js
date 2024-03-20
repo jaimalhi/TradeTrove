@@ -2,9 +2,6 @@ import React from "react";
 import JobsCard from "./JobsCard";
 
 function ViewJobsPage() {
-   //! Jobs should have visible attributes jid, trade_type, description, & location
-   //! location should be displayed using lat, long coordinates; ex. 49.282, 123.120
-   //! Date is not required as it is not a attribute that exists in the database table
    const jobs = [
       {
          name: "Fix faucet",

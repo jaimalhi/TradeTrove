@@ -7,13 +7,24 @@ const db = require("../models/tradieModel");
 
 // Get all customers (tradie=true)
 router.get("/", async (req, res) => {
-  try {
-    const tradies = await db.getTradies();
-    res.json(tradies);
-  } catch (err) {
-    console.error("Error getting tradies:", err);
-    res.status(500).send("Internal Server Error");
-  }
+   try {
+      const tradies = await db.getTradies();
+      res.json(tradies);
+   } catch (err) {
+      console.error("Error getting tradies:", err);
+      res.status(500).send("Internal Server Error");
+   }
+});
+
+// Get all jobs for tradies (tradie=true)
+router.get("/jobs", async (req, res) => {
+   try {
+      const jobs = await db.getTradieJobs();
+      res.json(jobs);
+   } catch (err) {
+      console.error("Error getting tradie jobs:", err);
+      res.status(500).send("Internal Server Error");
+   }
 });
 
 // Sign up tradie
@@ -60,23 +71,23 @@ router.post("/signup", async (req, res) => {
 
 //Get tradie with uid
 router.get("/getTradieInfo", async (req, res) => {
-  try {
-    const cookieUid = req.cookies.uid;
-    console.log("cookieUid", cookieUid);
-    const getTradie = await db.getTradie(cookieUid);
-   //  console.log("this is re", getTradie);
-    res.json(getTradie);
-  } catch {
-    console.error("Error signing in", err);
-    res.status(500).send("Internal Server Error");
-  }
+   try {
+      const cookieUid = req.cookies.uid;
+      console.log("cookieUid", cookieUid);
+      const getTradie = await db.getTradie(cookieUid);
+      //  console.log("this is re", getTradie);
+      res.json(getTradie);
+   } catch {
+      console.error("Error signing in", err);
+      res.status(500).send("Internal Server Error");
+   }
 });
 
 router.post("/addSkill", async (req, res) => {
-  const cookieUid = req.cookies.uid;
-  console.log("cookieUid", cookieUid);
-  const addSkill = await db.addSkill(cookieUid,req.body.data);
-  res.send(addSkill)
+   const cookieUid = req.cookies.uid;
+   console.log("cookieUid", cookieUid);
+   const addSkill = await db.addSkill(cookieUid, req.body.data);
+   res.send(addSkill);
 });
 
 module.exports = router;

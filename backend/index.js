@@ -3,10 +3,13 @@ const express = require("express");
 let cors = require("cors");
 const pool = require("./database");
 const sample = require("./utils/SampleData");
+var cookieParser = require("cookie-parser");
+
+// Controllers
 const customerRoutes = require("./controllers/customerController");
 const tradieRoutes = require("./controllers/tradieController");
 const authRoutes = require("./controllers/AuthController");
-var cookieParser = require("cookie-parser");
+const userRoutes = require("./controllers/UserController");
 
 const app = express();
 const PORT = 8080;
@@ -26,6 +29,7 @@ app.use(
 app.use("/api/customers", customerRoutes);
 app.use("/api/tradies", tradieRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 // Initialize the database
 async function init() {

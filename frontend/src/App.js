@@ -9,7 +9,7 @@ import ViewJobsPage from "./components/ViewJobsPage/ViewJobsPage";
 import TradieServicesPage from "./components/TradieServicesPage/TradieServicesPage";
 import Cookies from "js-cookie";
 import { useState } from "react";
-
+import CustomerServices from "./components/CustomerServices/CustomerServices";
 import { BrowserRouter as Router, Switch, Route, Routes, Link } from "react-router-dom";
 
 function App() {
@@ -74,7 +74,7 @@ function App() {
                   />,
                ]}></Route>
             <Route
-               path="/tradieViewJobs"
+               path="/tradie/jobs"
                element={[
                   <Navbar
                      isLoggedIn={isLoggedIn}
@@ -84,7 +84,7 @@ function App() {
                   <ViewJobsPage />,
                ]}></Route>
             <Route
-               path="/tradieServicesPage"
+               path="/tradie/services"
                element={[
                   <Navbar
                      isLoggedIn={isLoggedIn}
@@ -93,6 +93,11 @@ function App() {
                   />,
                   <TradieServicesPage />,
                ]}></Route>
+            <Route path="/customer/services" element={[ <Navbar
+                     isLoggedIn={isLoggedIn}
+                     handleLogoutClicked={handleLogoutClicked}
+                     isTradie={isTradie}
+                  />,<CustomerServices />]}></Route>
          </Routes>
       </Router>
    );
