@@ -91,9 +91,9 @@ const Login = ({ handleLoginCookie, handleTradieCookie }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-very-light-green">
+    <div className="flex justify-center items-center h-screen bg-white">
       <div className="w-full max-w-xs">
-        <h1 className="text-xl font-semibold text-dark-green mb-4 text-center">
+        <h1 className="text-3xl font-semibold text-dark-green mb-4 text-center">
           Login
         </h1>
         <p className="text-medium-green">

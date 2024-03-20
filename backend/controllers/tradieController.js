@@ -29,22 +29,25 @@ router.get("/jobs", async (req, res) => {
 
 // Sign up tradie
 router.post("/signup", async (req, res) => {
-  console.log(req.body.data.form);
-  const { uid, email } = req.body.data.user;
-  const { password, phoneNumber, age, gender, isTradesperson, name } =
-    req.body.data.form;
-  try {
-    //! Need to match data to the database schema
-    const signUpSuccess = await db.signUp(
-      uid,
-      email,
-      password,
-      phoneNumber,
-      age,
-      gender,
-      isTradesperson,
-      name
-    );
+   console.log(req.body.data.form);
+   const { uid, email } = req.body.data.user;
+   const { firstName, lastName, password, phoneNumber, isTradesperson,yearsOfExperience, skills  } =
+     req.body.data.form;
+ 
+   try {
+     //! Need to match data to the database schema
+     const signUpSuccess = await db.signUp(
+       uid,
+       email,
+       password,
+       firstName,
+       lastName,
+       phoneNumber,
+       isTradesperson,
+       yearsOfExperience,
+       skills
+     
+     );
     console.log(
       "Sign up query for tradie finished successfully",
       signUpSuccess

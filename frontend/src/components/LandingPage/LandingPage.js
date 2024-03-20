@@ -14,7 +14,7 @@ function LandingPage() {
 
 
   return (
-    <div className="landingPage">
+    <div className="landingPage pt-[20px]">
       <div className="landingPageContainer">
         <img
           className="landingPage_image"
@@ -36,7 +36,7 @@ function LandingPage() {
             <Link to="/login">
               <button
                 type="button"
-                className=" text-white w-3/4 h-3/4 text-[#000000] bg-[#D2E3C8] hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
+                className=" text-white w-3/4 h-3/4 text-[#000000] bg-dark-green hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
               >
                 Login
               </button>
@@ -46,7 +46,7 @@ function LandingPage() {
             <Link to="/signup">
               <button
                 type="button"
-                className=" text-white w-3/4 h-3/4 text-[#000000] bg-[#D2E3C8] hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
+                className=" text-white w-3/4 h-3/4 text-[#000000] bg-dark-green hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
               >
                 Sign Up
               </button>

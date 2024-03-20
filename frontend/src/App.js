@@ -7,6 +7,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 import ViewJobsPage from "./components/ViewJobsPage/ViewJobsPage";
 import TradieServicesPage from "./components/TradieServicesPage/TradieServicesPage";
+import ViewTradies from "./components/ViewTradies/ViewTradies";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import CustomerServices from "./components/CustomerServices/CustomerServices";
@@ -94,6 +95,11 @@ function App() {
                   <TradieServicesPage />,
                ]}></Route>
             <Route path="/customer/services" element={[ <Navbar
+                     isLoggedIn={isLoggedIn}
+                     handleLogoutClicked={handleLogoutClicked}
+                     isTradie={isTradie}
+                  />,<ViewTradies />]}></Route>
+            <Route path="/customer/jobs" element={[ <Navbar
                      isLoggedIn={isLoggedIn}
                      handleLogoutClicked={handleLogoutClicked}
                      isTradie={isTradie}
