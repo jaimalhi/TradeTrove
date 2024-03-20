@@ -41,6 +41,7 @@ async function init() {
    const jobsTable =
       "CREATE TABLE IF NOT EXISTS Jobs (jid SERIAL,uid VARCHAR(30),trade_type VARCHAR(255),postal_code VARCHAR(12),description TEXT,date DATE,image INT,PRIMARY KEY (jid, uid),FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE,FOREIGN KEY (image) REFERENCES Images(image_id) ON DELETE CASCADE)";
 
+
    await pool.query(usersTable);
    await pool.query(tradieTable);
    await pool.query(imagesTable);

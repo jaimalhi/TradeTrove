@@ -75,4 +75,33 @@ router.post("/addSkill", async (req, res) => {
   res.send(addSkill)
 });
 
+router.get("/jobs", async (req, res) => {
+   try {
+      const jobs = await db.getJobs();
+      res.json(jobs);
+   } catch (err) {
+      console.error("Error getting tradies:", err);
+      res.status(500).send("Internal Server Error");
+   }
+})
+
+router.post("/jobs", async (req, res) => {
+   const jobDetails = req.body;
+   if (!jobDetails) {
+      res.status(403).send('BAD REQUEST')
+      return
+   }
+   try {
+      const confirmAdded = await db.addJob(jobDetails);
+      if (!confirmAdded) {
+         res.status(403).send('BAD REQUEST, Wrong user')
+         return
+      }
+      res.sendStatus(200);
+   } catch (err) {
+      console.error("Error getting tradies:", err);
+      res.status(500).send("Internal Server Error");
+   }
+})
+
 module.exports = router;
