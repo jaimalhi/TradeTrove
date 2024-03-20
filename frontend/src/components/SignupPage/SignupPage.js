@@ -13,21 +13,22 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
-    phoneNumber: "",
-    age: "",
-    gender: "",
-    isTradesperson: false,
-  });
+   firstName: "",
+   lastName: "",
+   phoneNumber: "",
+   isTradesperson: false,
+   yearsOfExperience: "",  
+   skills: ""
+ });
 
-   const handleChange = (e) => {
-      const { name, value, type, checked } = e.target;
-      setFormData((prevData) => ({
-         ...prevData,
-         [name]: value,
-      }));
-   };
 
+ const handleChange = (e) => {
+  const { name, value, type, checked } = e.target;
+  setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+  }));
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
@@ -109,21 +110,31 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
    };
 
    return (
-      <div className="flex justify-center items-center h-screen bg-very-light-green">
+      <div className="flex justify-center items-center h-screen bg-white">
          <form onSubmit={handleSubmit} className="w-full max-w-xs">
-            <h2 className="text-center text-dark-green mb-6">Sign Up</h2>
+            <h2 className="text-3xl text-center text-dark-green mb-6">Sign Up</h2>
             <p className="text-medium-green mb-4">Please fill in this form to create an account!</p>
+          <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="First Name"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+          className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green "
+        />
 
-            <input
-               type="text"
-               id="name"
-               name="name"
-               placeholder="Name"
-               value={formData.name}
-               onChange={handleChange}
-               required
-               className="mb-4 px-3 py-2 rounded shadow w-full"
-            />
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Last Name"
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+          className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green "
+        />
 
             <input
                type="email"
@@ -133,7 +144,7 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
                value={formData.email}
                onChange={handleChange}
                required
-               className="mb-4 px-3 py-2 rounded shadow w-full"
+               className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green"
             />
 
             <input
@@ -144,7 +155,7 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
                value={formData.password}
                onChange={handleChange}
                required
-               className="mb-4 px-3 py-2 rounded shadow w-full"
+               className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green"
             />
 
             <input
@@ -155,9 +166,18 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
                value={formData.confirmPassword}
                onChange={handleChange}
                required
-               className="mb-4 px-3 py-2 rounded shadow w-full"
+               className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green"
             />
-
+           <input
+          type="text"
+          id="phoneNumber"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          required
+          className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green "
+        />
             <div className="flex justify-around mb-4">
                <span className="mb-2 block text-lg">Are you a Trades Person?</span>
                <label className="inline-flex items-center">
@@ -183,6 +203,30 @@ function SignupPage({handleLoginCookie, handleTradieCookie}) {
                   <span className="ml-2">No</span>
                </label>
             </div>
+            {formData.isTradesperson === "true" && (
+          <div>
+            <input
+              type="text"
+              id="yearsOfExperience"
+              name="yearsOfExperience"
+              placeholder="Years of Experience"
+              value={formData.yearsOfExperience}
+              onChange={handleChange}
+              required
+              className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green "
+            />
+
+            <textarea
+              id="skills"
+              name="skills"
+              placeholder="Skills"
+              value={formData.skills}
+              onChange={handleChange}
+              required
+              className="mb-4 px-3 py-2 rounded shadow w-full border-2 border-medium-green "
+              style={{ height: '100px' }} // Adjust height as needed
+            />
+          </div> )}
 
             <button
                type="submit"
