@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const baseURL = "http://localhost:8080";
 
-const Login = () => {
+const Login = ({handleLoginCookie, handleTradieCookie}) => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const provider = new GoogleAuthProvider();
@@ -28,12 +28,10 @@ const Login = () => {
             //   body: { token: token, user: user },
             // });
             console.log(user, token);
+            handleLoginCookie() // TODO: ADD COOKIE FOR IS TRADIE AND NAV STUFF
             navigate("/");
          })
          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            const email = error.customData.email;
             // The AuthCredential type that was used.
             alert("Sorry, cannot log you in.");
             const credential = GoogleAuthProvider.credentialFromError(error);
@@ -65,14 +63,19 @@ const Login = () => {
               .then((response) => {
                 console.log(response.data);
                 if (response.data === true) {
+                  handleLoginCookie()
+                  handleTradieCookie("true");
                   navigate("/tradieViewJobs");
                 } else {
                   console.log(response);
+                  handleLoginCookie();
+                  handleTradieCookie("false")
                   navigate("/");
                 }
               })
               .catch((error) => {
                 console.error("Error:", error);
+                alert("Sorry error occurred!")
               });
          })
          .catch((error) => {

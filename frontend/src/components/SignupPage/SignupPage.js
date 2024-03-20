@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 const baseURL = "http://localhost:8080";
 
-function SignupPage() {
+function SignupPage({handleLoginCookie, handleTradieCookie}) {
   var uid = "";
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -60,6 +60,8 @@ function SignupPage() {
               if (uidResponse) {
                 console.log("Successfully signed up the tradie!");
                 uid = uidResponse;
+                handleLoginCookie();
+                handleTradieCookie("true");
                 navigate("/tradieViewJobs");
               }
             })
@@ -68,14 +70,26 @@ function SignupPage() {
             });
         } else {
           const uidResponse = axios
-            .post(`${baseURL}/api/customers/signup`, {
-              title: "Authenticated",
-              data: { user: user, form: formData },
-            })
+            .post(
+              `${baseURL}/api/customers/signup`,
+              {
+                title: "Authenticated",
+                data: { user: user, form: formData },
+              },
+              {
+                withCredentials: true,
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Content-Type": "application/json",
+                },
+              }
+            )
             .then((uidResponse) => {
               if (uidResponse) {
                 console.log("Successfully signed up!");
                 uid = uidResponse;
+                handleLoginCookie();
+                handleTradieCookie("false");
                 navigate("/");
               }
             })

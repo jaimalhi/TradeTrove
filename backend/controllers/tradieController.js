@@ -47,6 +47,10 @@ router.post("/signup", async (req, res) => {
        httpOnly: true,
        path: "/",
      });
+     res.cookie("loggedIn", true, {
+       httpOnly: false,
+       path: "/",
+     });
     res.json(signUpSuccess);
   } catch (err) {
     console.error("Error signing in", err);
