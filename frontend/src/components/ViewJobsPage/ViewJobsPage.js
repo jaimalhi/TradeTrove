@@ -37,6 +37,7 @@ function ViewJobsPage() {
    useEffect(() => {
       setFilteredJobs(() => jobs.filter((j) => j.trade_type.toLowerCase().includes(searchTerm.toLowerCase()) || j.description.toLowerCase().includes(searchTerm.toLowerCase()) || j.location.toLowerCase().includes(searchTerm.toLowerCase()) || !searchTerm))
    }, [searchTerm]);
+
    return (
       <div>
          <SearchBar

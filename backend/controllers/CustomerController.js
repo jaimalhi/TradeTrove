@@ -16,6 +16,37 @@ router.get("/", async (req, res) => {
    }
 });
 
+// Get all jobs for customers (tradie=false)
+router.get("/jobs", async (req, res) => {
+   try {
+      const jobs = await db.getCustomerJobs();
+      res.json(jobs);
+   } catch (err) {
+      console.error("Error getting customer jobs:", err);
+      res.status(500).send("Internal Server Error");
+   }
+});
+
+// create job as a customer
+router.post("/create-job", async (req, res) => {
+   const { uid, trade_type, postalCode, description, date, title, imageData } = req.body;
+   try {
+      const job = await db.createJob(
+         uid,
+         trade_type,
+         postalCode,
+         description,
+         date,
+         title,
+         imageData
+      );
+      res.json(job);
+   } catch (err) {
+      console.error("Error creating job:", err);
+      res.status(500).send("Internal Server Error");
+   }
+});
+
 router.post("/signup", async (req, res) => {
    const { uid, email } = req.body.data.user;
    const { password, phoneNumber, age, gender, isTradesperson, name } = req.body.data.form;
@@ -31,12 +62,16 @@ router.post("/signup", async (req, res) => {
          isTradesperson,
          name
       );
-       res.header("Access-Control-Allow-Credentials", "true");
-       res.cookie("uid", uid, {
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.cookie("uid", uid, {
+         httpOnly: false,
+         path: "/",
+      });
+      res.cookie("isTradie", false, {
          httpOnly: false,
          path: "/",
        });
-       res.cookie("isTradie", false, {
+       res.cookie("loggedIn", true, {
          httpOnly: false,
          path: "/",
        });

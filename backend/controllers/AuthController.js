@@ -21,6 +21,10 @@ router.post("/login", async (req, res) => {
         httpOnly: false,
         path: "/",
       });
+      res.cookie("loggedIn", true, {
+        httpOnly: false,
+        path: "/",
+      });
       res.status(200).json(isTradie);
       // res.send("cookie");
    } catch (err) {
