@@ -35,8 +35,11 @@ async function signUp(uid, email, password, phoneNumber, age, gender, isTradespe
 //add job to jobs table
 async function createJob(uid, trade_type, postalCode, description, date, title, imageData) {
    // insert image into images table and get image_id
-   const imageQuery = "INSERT INTO images(title, data) VALUES ($1,$2) RETURNING image_id";
-   const imageId = await pool.query(imageQuery, [title, imageData]);
+   //convert string to binary representation
+   const imageQuery =
+     "INSERT INTO images(title, data) VALUES ($1,decode($2, 'base64')) RETURNING image_id";
+   const image64split = imageData.split(";base64,").pop();  //imageData is a base64 string 
+   const imageId = await pool.query(imageQuery, [title, image64split]);
 
    // insert all into jobs table
    const q =
