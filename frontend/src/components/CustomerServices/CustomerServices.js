@@ -2,36 +2,41 @@ import React, { useEffect, useState } from "react";
 import LandingImage from "../../Resources/Images/LandingImage.jpg";
 import { FaWrench, FaPlus } from "react-icons/fa";
 import AddJobsBox from "./AddJobsBox";
+import ImageViewer from "./ImageViewer";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const baseURL = "http://localhost:8080";
+const placeholderCustomer = {
+   first_name: "Loading User...",
+   last_name: "",
+   email: "please wait...",
+   tradie: false,
+   phone_num: "1234567890",
+};
 
 function CustomerServices() {
-   const placeholderTradie = {
-      first_name: "James",
-      last_name: "John",
-      email: "example@demo.com",
-      passsword: "",
-      skills: ["plumbing", "cleaning", "mounting tv", "fixing shower"],
-      years_experience: "0",
-   };
-
-   const [tradieInfo, setTradieInfo] = useState(placeholderTradie);
+   const [customerInfo, setCustomerInfo] = useState(placeholderCustomer);
    const [showOverlay, setShowOverlay] = useState(false);
+   const [jobs, setJobs] = useState([]);
+   const [imageSrc, setImageSrc] = useState("");
+
+   // get uid from cookies
+   const uidCookie = Cookies.get("uid");
 
    useEffect(() => {
-      try {
-         const response = axios
-            .get(`${baseURL}/api/tradies/jobs`, {
-               withCredentials: true,
-            })
-            .then((response) => {
-               setTradieInfo(response.data);
-            });
-      } catch (error) {
-         console.log("Error!");
-      }
-   }, [showOverlay]);
+      Promise.all([
+         axios.get(`${baseURL}/api/users/${uidCookie}`),
+         axios.get(`${baseURL}/api/users/${uidCookie}/jobs`),
+      ])
+         .then(([response1, response2]) => {
+            setCustomerInfo(response1.data);
+            setJobs(response2.data);
+         })
+         .catch((error) => {
+            console.error("There was an error!", error);
+         });
+   }, [showOverlay, uidCookie]);
 
    const addServiceButtonClicked = async () => {
       setShowOverlay(true);
@@ -45,31 +50,46 @@ function CustomerServices() {
       <div>
          <div className="p-24 mx-auto mt-8 max-w-screen-lg">
             <div className="p-5 bg-white rounded-xl shadow-md flex flex-row items-center">
-               <img src={LandingImage} className="w-60 h-60 rounded-full ml-14" alt="job-image" />
+               <img src={LandingImage} className="w-60 h-60 rounded-full ml-14" alt="job" />
                <div className="flex flex-col justify-between ml-10">
                   <p className="text-3xl text-center">
-                     {tradieInfo.first_name} {tradieInfo.last_name}
+                     {customerInfo.first_name} {customerInfo.last_name}
                   </p>
-                  <p className="text-3xl text-center">
-                     {tradieInfo.years_experience} years of experience
-                  </p>
-                  <p className="text-3xl text-center">{tradieInfo.email}</p>
+                  <p className="text-3xl text-center">{customerInfo.email}</p>
+                  <p className="text-3xl text-center">{customerInfo.phone_num}</p>
                </div>
             </div>
-            <h3 className="text-4xl text-center mt-12 mb-8">My Services</h3>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-               {tradieInfo.skills.map((service, index) => (
-                  <li key={index} className="bg-white shadow-md rounded-lg flex items-center p-4">
-                     <FaWrench className="text-green-600 mr-4" size={30} />
-                     <span className="text-xl">{service}</span>
-                  </li>
-               ))}
-            </ul>
+            <h3 className="text-4xl text-center mt-12 mb-8">My Jobs</h3>
+            {jobs.length === 0 ? (
+               <ul className="flex justify-center items-center">
+                  <li className="bg-white shadow-md rounded-lg p-4">No jobs created</li>
+               </ul>
+            ) : (
+               <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {jobs.map((job) => (
+                     <li key={job.jid} className="bg-white shadow-md rounded-lg flex flex-col p-4">
+                        <span>
+                           <b>Trade Type:</b> {job.trade_type}
+                        </span>
+                        <span>
+                           <b>Postal Code:</b> {job.postal_code}
+                        </span>
+                        <span>
+                           <b>Description: </b> {job.description}
+                        </span>
+                        <span>
+                           <b>Date:</b> {new Date(job.date).toISOString().slice(0, 10)}
+                        </span>
+                        <ImageViewer apiData={job} />
+                     </li>
+                  ))}
+               </ul>
+            )}
             <div className="flex justify-center mt-8">
                <button
                   className="flex items-center px-4 py-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-800"
                   onClick={addServiceButtonClicked}>
-                  <FaPlus className="mr-2" /> Add Service
+                  <FaPlus className="mr-2" /> Add Job
                </button>
             </div>
          </div>
