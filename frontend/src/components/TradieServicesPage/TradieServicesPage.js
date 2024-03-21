@@ -4,7 +4,7 @@ import { FaWrench, FaPlus } from "react-icons/fa";
 import AddServicesBox from "./AddServiesBox";
 import axios from "axios";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "https://cmpt-372-411622.uc.r.appspot.com";
 
 function TradieServicesPage() {
   const placeholderTradie = {

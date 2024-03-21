@@ -3,7 +3,7 @@ import JobsCard from "./JobsCard";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 
-const SERVER_URL = 'http://localhost:8080'; //change after hosting
+const SERVER_URL = "https://cmpt-372-411622.uc.r.appspot.com"; //change after hosting
 async function getJobs() {
 
    const res = await axios.get(`${SERVER_URL}/api/tradies/jobs`)

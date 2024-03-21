@@ -5,7 +5,7 @@ import { auth } from "../LoginPage/firebase";
 import "./SignupPage.css";
 import { useNavigate } from "react-router";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "https://cmpt-372-411622.uc.r.appspot.com";
 
 function SignupPage({handleLoginCookie, handleTradieCookie}) {
   var uid = "";

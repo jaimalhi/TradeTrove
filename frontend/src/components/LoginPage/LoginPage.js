@@ -11,7 +11,7 @@ import {
 import { auth } from "./firebase";
 import { useNavigate } from "react-router-dom";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "https://cmpt-372-411622.uc.r.appspot.com";
 
 const Login = ({ handleLoginCookie, handleTradieCookie }) => {
   const [email, setEmail] = useState("");

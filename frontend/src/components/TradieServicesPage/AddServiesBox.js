@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import axios from "axios";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "https://cmpt-372-411622.uc.r.appspot.com";
 
 const AddServicesBox = ({ onCloseButtonClicked }) => {
   const [skillName, setSkillName] = useState("");

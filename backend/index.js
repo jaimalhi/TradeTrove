@@ -6,7 +6,7 @@ const sample = require("./utils/SampleData");
 var cookieParser = require("cookie-parser");
 
 // Controllers
-const customerRoutes = require("./controllers/customerController");
+const customerRoutes = require("./controllers/CustomerController");
 const tradieRoutes = require("./controllers/tradieController");
 const authRoutes = require("./controllers/AuthController");
 const userRoutes = require("./controllers/UserController");

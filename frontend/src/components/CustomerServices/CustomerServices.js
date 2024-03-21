@@ -6,7 +6,7 @@ import ImageViewer from "./ImageViewer";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "https://cmpt-372-411622.uc.r.appspot.com";
 const placeholderCustomer = {
    first_name: "Loading User...",
    last_name: "",
