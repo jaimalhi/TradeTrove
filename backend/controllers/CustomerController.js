@@ -1,7 +1,7 @@
 //* Handles API endpoints for the customer view of the frontend
 const express = require("express");
 const router = express.Router();
-const db = require("../models/customerModel");
+const db = require("../models/CustomerModel");
 
 //! ALL ENDPOINTS PREFIXED WITH /api/customers AS DEFINED IN index.js
 

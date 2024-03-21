@@ -78,9 +78,11 @@ async function addSkill(uid, skill) {
 
 async function getTradieJobs() {
    const res = await pool.query(
-      "SELECT jobs.* FROM jobs, users WHERE users.tradie=true AND users.uid=jobs.uid"
+      "SELECT * FROM jobs"
    );
    const jobs = res.rows;
+   console.log(jobs);
+
    return jobs;
 }
 

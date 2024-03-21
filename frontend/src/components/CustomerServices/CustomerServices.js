@@ -5,8 +5,8 @@ import AddJobsBox from "./AddJobsBox";
 import ImageViewer from "./ImageViewer";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { baseURL } from "../../utils/apiHelper";
 
-const baseURL = "http://localhost:8080";
 const placeholderCustomer = {
    first_name: "Loading User...",
    last_name: "",
@@ -30,7 +30,7 @@ function CustomerServices() {
          axios.get(`${baseURL}/api/users/${uidCookie}/jobs`),
       ])
          .then(([response1, response2]) => {
-            console.log(response1)
+            console.log(response1);
             setCustomerInfo(response1.data);
             console.log(response2.data);
             setJobs(response2.data);

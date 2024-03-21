@@ -1,5 +1,6 @@
 # Ignore node_modules directory
 node_modules/
+build/
 
 # Ignore .env files
 .env
@@ -10,3 +11,4 @@ node_modules/
 # Ignore compiled files
 *.exe
 *.o
+
