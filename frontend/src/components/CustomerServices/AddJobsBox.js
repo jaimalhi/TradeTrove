@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import axios from "axios";
 import Cookies from "js-cookie";
-
-const baseURL = "https://cmpt-372-411622.uc.r.appspot.com";
+import { baseURL } from "../../utils/apiHelper";
 
 const AddJobsBox = ({ onCloseButtonClicked }) => {
    const [tradeType, setTradeType] = useState("");
