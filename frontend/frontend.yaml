@@ -1,0 +1,13 @@
+# [START runtime]
+service: frontend
+runtime: nodejs20
+# [END runtime]
+
+# [START handlers]
+handlers:
+  - url: /
+    static_files: build/index.html
+    upload: build/index.html
+  - url: /
+    static_dir: build
+  # [END handlers]
