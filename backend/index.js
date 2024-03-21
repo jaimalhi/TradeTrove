@@ -3,6 +3,7 @@ const express = require("express");
 let cors = require("cors");
 const pool = require("./database");
 const sample = require("./utils/SampleData");
+const path = require("path");
 var cookieParser = require("cookie-parser");
 
 // Controllers
@@ -20,16 +21,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
    cors({
-      origin: "http://localhost:3000",
+      //   origin: "http://localhost:3000",
+      origin: "http://34.121.253.218",
       credentials: true,
    })
 );
+
+// static files
+app.use("/", express.static(path.join(__dirname, "./static"), { index: ["index.html"] }));
+app.use("/", (req, res, next) => {
+   console.log("req.url", req.url);
+   next();
+});
 
 // Use routes from controllers
 app.use("/api/customers", customerRoutes);
 app.use("/api/tradies", tradieRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+
+// routes for react app, Catch-all handler for any request that doesn't match the ones above
+app.get("*", (req, res) => {
+   res.sendFile(path.join(__dirname, "./static", "index.html"));
+});
 
 // Initialize the database
 async function init() {
@@ -44,7 +58,6 @@ async function init() {
 
    const jobsTable =
       "CREATE TABLE IF NOT EXISTS Jobs (jid SERIAL,uid VARCHAR(30),trade_type VARCHAR(255),postal_code VARCHAR(12),description TEXT,date DATE,image INT,PRIMARY KEY (jid, uid),FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE,FOREIGN KEY (image) REFERENCES Images(image_id) ON DELETE CASCADE)";
-
 
    await pool.query(usersTable);
    await pool.query(tradieTable);
