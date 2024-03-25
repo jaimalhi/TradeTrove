@@ -49,8 +49,24 @@ function CustomerServices() {
    };
 // Function to get initials from first and last name
 const getInitials = (firstName, lastName) => {
-   return `${firstName[0]}${lastName[0]}`;
-};
+   // Check if both names are provided and are not empty
+   if (firstName && lastName) {
+     return `${firstName[0]}${lastName[0]}`;
+   }
+   // If only firstName is provided and not empty
+   else if (firstName) {
+     return `${firstName[0]}`;
+   }
+   // If only lastName is provided and not empty
+   else if (lastName) {
+     return `${lastName[0]}`;
+   }
+   // If neither name is provided or both are empty, return a default placeholder
+   else {
+     return 'NN'; // Or any other placeholder you prefer
+   }
+ };
+ 
 
    return (
       <div>
