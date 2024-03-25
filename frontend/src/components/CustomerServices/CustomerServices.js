@@ -47,24 +47,30 @@ function CustomerServices() {
    const onCloseButtonClicked = async () => {
       setShowOverlay(false);
    };
+// Function to get initials from first and last name
+const getInitials = (firstName, lastName) => {
+   return `${firstName[0]}${lastName[0]}`;
+};
 
    return (
       <div>
          <div className="p-24 mx-auto mt-8 max-w-screen-lg">
-            <div className="p-5 bg-white rounded-xl shadow-md flex flex-row items-center">
-               <img src={LandingImage} className="w-60 h-60 rounded-full ml-14" alt="job" />
+            <div className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
+            <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-3xl">
+                                {getInitials(customerInfo.first_name, customerInfo.last_name)}
+                            </div>
                <div className="flex flex-col justify-between ml-10">
                   <p className="text-3xl text-center">
                      {customerInfo.first_name} {customerInfo.last_name}
                   </p>
-                  <p className="text-3xl text-center">{customerInfo.email}</p>
-                  <p className="text-3xl text-center">{customerInfo.phone_num}</p>
+                  <p className="text-xl text-center">{customerInfo.email}</p>
+                  <p className="text-xl text-center">{customerInfo.phone_num}</p>
                </div>
             </div>
             <h3 className="text-4xl text-center mt-12 mb-8">My Jobs</h3>
             {jobs.length === 0 ? (
                <ul className="flex justify-center items-center">
-                  <li className="bg-white shadow-md rounded-lg p-4">No jobs created</li>
+                  <li className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">No jobs created</li>
                </ul>
             ) : (
                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -89,7 +95,7 @@ function CustomerServices() {
             )}
             <div className="flex justify-center mt-8">
                <button
-                  className="flex items-center px-4 py-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-800"
+                  className="flex items-center px-4 py-2 bg-light-green text-white rounded-full shadow-lg hover:bg-medium-green"
                   onClick={addServiceButtonClicked}>
                   <FaPlus className="mr-2" /> Add Job
                </button>
