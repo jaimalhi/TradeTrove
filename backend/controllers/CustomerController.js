@@ -49,18 +49,17 @@ router.post("/create-job", async (req, res) => {
 
 router.post("/signup", async (req, res) => {
    const { uid, email } = req.body.data.user;
-   const { password, phoneNumber, age, gender, isTradesperson, name } = req.body.data.form;
+   const {firstName, lastName, password, phoneNumber,isTradesperson} = req.body.data.form;
    try {
       //! Need to match data to the database schema
       const signUpSuccess = await db.signUp(
-         uid,
-         email,
-         password,
-         phoneNumber,
-         age,
-         gender,
-         isTradesperson,
-         name
+       uid,
+       email,
+       password,
+       firstName,
+       lastName,
+       phoneNumber,
+       isTradesperson
       );
       res.header("Access-Control-Allow-Credentials", "true");
       res.cookie("uid", uid, {
