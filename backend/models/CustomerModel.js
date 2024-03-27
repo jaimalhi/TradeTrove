@@ -17,16 +17,17 @@ async function getCustomerJobs() {
 }
 
 //add customer to user table
-async function signUp(uid, email, password, phoneNumber, age, gender, isTradesperson, name) {
+async function signUp(uid, email, password,first_name, last_name, phoneNumber, isTradesperson) {
    const q =
-      "INSERT into users(uid,email,password,first_name,last_name,tradie) VALUES ($1,$2,$3,$4,$5,$6) RETURNING uid";
+      "INSERT into users(uid,email,password,first_name,last_name, phone_num, tradie) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING uid";
    const uidAdded = await pool.query(q, [
       uid,
       email,
       password,
-      name,
-      "DEFAULT LAST NAME",
-      isTradesperson,
+      first_name,
+      last_name,
+      phoneNumber,
+      isTradesperson
    ]);
    console.log(uidAdded.rows[0]);
    return uidAdded.rows[0].uid;
