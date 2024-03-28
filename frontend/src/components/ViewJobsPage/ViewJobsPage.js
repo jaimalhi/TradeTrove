@@ -14,14 +14,18 @@ function ViewJobsPage() {
    const [jobs, setJobs] = useState([]);
    const [filteredJobs, setFilteredJobs] = useState([]);
    const [searchTerm, setSearchTerm] = useState("");
+   const [locationTerm, setLocationTerm] = useState("");
+   const [pincodeDict, setpincodeDict] = useState({"":""});
+
 
    useEffect(() => {
       async function fetchData() {
          try {
             const res = await getJobs();
 
-            setJobs(res);
-            setFilteredJobs(res);
+            setJobs(res.jobs);
+            setFilteredJobs(res.jobs);
+            setpincodeDict(res.pincodeCityDict);
          } catch (err) {
             console.log(err);
          }
@@ -31,26 +35,27 @@ function ViewJobsPage() {
 
    useEffect(() => {
       setFilteredJobs(() =>
-         jobs.filter(
-            (j) =>
-               (j.trade_type && j.trade_type.toLowerCase().includes(searchTerm.toLowerCase())) ||
-               (j.description && j.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
-               (j.location && j.location.toLowerCase().includes(searchTerm.toLowerCase())) ||
-               !searchTerm
-         )
+        jobs.filter(
+          (j) =>
+            (((j.trade_type && j.trade_type.toLowerCase().includes(searchTerm.toLowerCase())) ||
+              (j.description && j.description.toLowerCase().includes(searchTerm.toLowerCase())))) &&
+              (pincodeDict[j.postal_code].toLowerCase().includes(locationTerm.toLowerCase())) 
+        )
       );
-   }, [searchTerm]);
+   }, [searchTerm,locationTerm]);
+   
+   
 
    return (
       <div>
-         <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
+         <SearchBar searchTerm={searchTerm} locationTerm={locationTerm} onSearchTermChange={setSearchTerm} onLocationTermChange={setLocationTerm} />
          {filteredJobs.map((job) => (
             <JobsCard
                key={job.jid}
                name={job.trade_type}
                info={job.description}
-               pincode={job.location}
-               date={new Date().toDateString()}
+               pincode={job.postal_code}
+               date={new Date(job.date).toDateString()}
             />
          ))}
       </div>

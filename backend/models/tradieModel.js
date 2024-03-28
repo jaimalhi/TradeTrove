@@ -81,15 +81,14 @@ async function getTradieJobs() {
       "SELECT * FROM jobs"
    );
    const jobs = res.rows;
-   console.log(jobs);
 
    return jobs;
 }
 
 module.exports = {
-   getTradies,
-   signUp,
-   getTradie,
-   addSkill,
-   getTradieJobs,
+  getTradies,
+  signUp,
+  getTradie,
+  addSkill,
+  getTradieJobs,
 };
