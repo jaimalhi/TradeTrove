@@ -57,7 +57,7 @@ function SignupPage({ handleLoginCookie, handleTradieCookie }) {
                         uid = uidResponse;
                         handleLoginCookie();
                         handleTradieCookie("true");
-                        navigate("/tradie/jobs");
+                        navigate("/tradie/jobs", { replace: true });
                      }
                   })
                   .catch((error) => {
@@ -85,7 +85,7 @@ function SignupPage({ handleLoginCookie, handleTradieCookie }) {
                         uid = uidResponse;
                         handleLoginCookie();
                         handleTradieCookie("false");
-                        navigate("/");
+                        navigate("/",{ replace: true });
                      }
                   })
                   .catch((error) => {
