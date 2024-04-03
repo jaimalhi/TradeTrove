@@ -79,22 +79,16 @@ function CustomerServices() {
             <p className="text-4xl  mb-4">
               {customerInfo.first_name} {customerInfo.last_name}
             </p>
-            <a
-              href={`mailto:${customerInfo.email}`}
-              className="text-2xl flex items-center mb-4 hover:text-blue-800"
-            >
-               <MdAttachEmail className="mr-4" />
+            <div className="text-2xl flex items-center mb-4">
+              <MdAttachEmail className="mr-4" />
               {customerInfo.email}
-             
-            </a>
-            <a
-              href={`tel:${customerInfo.phone_num}`}
-              className="text-2xl flex items-center mb-4 hover:text-blue-800"
+            </div>
+            <div
+              className="text-2xl flex items-center mb-4"
             >
-               <MdLocalPhone className="mr-4" />
+              <MdLocalPhone className="mr-4" />
               {customerInfo.phone_num}
-             
-            </a>
+            </div>
           </div>
         </div>
         <h3 className="text-4xl text-center mt-12 mb-8">My Jobs</h3>

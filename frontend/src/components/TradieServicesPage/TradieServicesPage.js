@@ -69,13 +69,12 @@ function TradieServicesPage() {
             <p className="text-4xl  mb-4">
               {tradieInfo.first_name} {tradieInfo.last_name}
             </p>
-            <a
-              href={`mailto:${tradieInfo.email}`}
-              className="text-2xl flex items-center mb-4 hover:text-blue-800"
+            <div
+              className="text-2xl flex items-center mb-4"
             >
               <MdAttachEmail className="mr-4" />
               {tradieInfo.email}
-            </a>
+            </div>
             <p className="text-2xl ">
               {tradieInfo.years_experience} years of experience
             </p>
