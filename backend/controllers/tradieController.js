@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models/tradieModel");
 const axios = require("axios");
+const bcrypt = require('bcrypt');
 
 //! ALL ENDPOINTS PREFIXED WITH /api/tradies AS DEFINED IN index.js
 
@@ -38,10 +39,10 @@ router.get("/jobs", async (req, res) => {
       const arr = apiRes.data.results[pincode];
       pincodeCityDict[pincode] = arr[0].city
     }
-    
+
     toSend = {
-       jobs:jobs,
-       pincodeCityDict: pincodeCityDict
+      jobs: jobs,
+      pincodeCityDict: pincodeCityDict
     }
     res.json(toSend);
   } catch (err) {
@@ -63,13 +64,14 @@ router.post("/signup", async (req, res) => {
     yearsOfExperience,
     skills,
   } = req.body.data.form;
-
+  const encryptedPassword = await bcrypt.hash(password, 10);
+  console.log("This is the encrypted pass ------------", encryptedPassword);
   try {
     //! Need to match data to the database schema
     const signUpSuccess = await db.signUp(
       uid,
       email,
-      password,
+      encryptedPassword,
       firstName,
       lastName,
       phoneNumber,
