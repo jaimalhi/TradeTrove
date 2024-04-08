@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import LandingImage from "../../Resources/Images/LandingImage.jpg";
 import { FaWrench, FaPlus } from "react-icons/fa";
 import AddJobsBox from "./AddJobsBox";
-import ImageViewer from "./ImageViewer";
+import ImageViewer from "../../utils/ImageViewer";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { baseURL } from "../../utils/apiHelper";
@@ -47,34 +47,33 @@ function CustomerServices() {
    const onCloseButtonClicked = async () => {
       setShowOverlay(false);
    };
-// Function to get initials from first and last name
-const getInitials = (firstName, lastName) => {
-   // Check if both names are provided and are not empty
-   if (firstName && lastName) {
-     return `${firstName[0]}${lastName[0]}`;
-   }
-   // If only firstName is provided and not empty
-   else if (firstName) {
-     return `${firstName[0]}`;
-   }
-   // If only lastName is provided and not empty
-   else if (lastName) {
-     return `${lastName[0]}`;
-   }
-   // If neither name is provided or both are empty, return a default placeholder
-   else {
-     return 'NN'; // Or any other placeholder you prefer
-   }
- };
- 
+   // Function to get initials from first and last name
+   const getInitials = (firstName, lastName) => {
+      // Check if both names are provided and are not empty
+      if (firstName && lastName) {
+         return `${firstName[0]}${lastName[0]}`;
+      }
+      // If only firstName is provided and not empty
+      else if (firstName) {
+         return `${firstName[0]}`;
+      }
+      // If only lastName is provided and not empty
+      else if (lastName) {
+         return `${lastName[0]}`;
+      }
+      // If neither name is provided or both are empty, return a default placeholder
+      else {
+         return "NN"; // Or any other placeholder you prefer
+      }
+   };
 
    return (
       <div>
          <div className="p-24 mx-auto mt-8 max-w-screen-lg">
             <div className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
-            <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-3xl">
-                                {getInitials(customerInfo.first_name, customerInfo.last_name)}
-                            </div>
+               <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-3xl">
+                  {getInitials(customerInfo.first_name, customerInfo.last_name)}
+               </div>
                <div className="flex flex-col justify-between ml-10">
                   <p className="text-3xl text-center">
                      {customerInfo.first_name} {customerInfo.last_name}
@@ -86,7 +85,9 @@ const getInitials = (firstName, lastName) => {
             <h3 className="text-4xl text-center mt-12 mb-8">My Jobs</h3>
             {jobs.length === 0 ? (
                <ul className="flex justify-center items-center">
-                  <li className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">No jobs created</li>
+                  <li className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
+                     No jobs created
+                  </li>
                </ul>
             ) : (
                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
