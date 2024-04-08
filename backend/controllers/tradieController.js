@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models/tradieModel");
 const axios = require("axios");
+const bcrypt = require('bcrypt');
 
 //! ALL ENDPOINTS PREFIXED WITH /api/tradies AS DEFINED IN index.js
 
@@ -35,6 +36,7 @@ router.get("/jobs", async (req, res) => {
             },
          });
 
+
          for (const pincode in apiRes.data.results) {
             const arr = apiRes.data.results[pincode];
             pincodeCityDict[pincode] = arr[0].city;
@@ -50,10 +52,12 @@ router.get("/jobs", async (req, res) => {
       console.error("Error getting tradie jobs:", err);
       res.status(500).send("Internal Server Error");
    }
+
 });
 
 // Sign up tradie
 router.post("/signup", async (req, res) => {
+
    console.log(req.body.data.form);
    const { uid, email } = req.body.data.user;
    const { firstName, lastName, password, phoneNumber, isTradesperson, yearsOfExperience, skills } =
@@ -91,6 +95,8 @@ router.post("/signup", async (req, res) => {
       console.error("Error signing in", err);
       res.status(500).send("Internal Server Error");
    }
+
+
 });
 
 //Get tradie with uid
