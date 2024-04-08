@@ -1,8 +1,16 @@
 import { React } from "react";
 import logoImage from "../../Resources/Images/logo.jpg";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom"; // Use NavLink for active link styling
 
 function Navbar({ isLoggedIn, handleLogoutClicked, isTradie }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    handleLogoutClicked();
+    navigate("/", { replace: true })
+  };
+
   return (
     <nav className="bg-[#739072] dark:bg-[#4F6F52] fixed w-full z-20 top-0 start-0 border-b border-[#86A789] dark:border-[#D2E3C8]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -104,7 +112,7 @@ function Navbar({ isLoggedIn, handleLogoutClicked, isTradie }) {
               <li>
                 <span
                   className="block py-2 px-3 text-[#000000] rounded hover:bg-[#86A789] md:hover:bg-transparent md:hover:text-[#D2E3C8] md:p-0 dark:hover:text-[#D2E3C8] dark:text-white dark:hover:bg-[#4F6F52] md:dark:hover:bg-transparent dark:border-[#D2E3C8]"
-                  onClick={handleLogoutClicked}
+                  onClick={handleLogout}
                 >
                   Logout
                 </span>

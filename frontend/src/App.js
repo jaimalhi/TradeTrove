@@ -11,14 +11,7 @@ import ViewTradies from "./components/ViewTradies/ViewTradies";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import CustomerServices from "./components/CustomerServices/CustomerServices";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Routes,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get("loggedIn")); // Initial login state
@@ -33,7 +26,9 @@ function App() {
   };
 
   const handleLogoutClicked = async (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     Cookies.set("loggedIn", "false");
     Cookies.remove("uid");
     Cookies.remove("isTradie");

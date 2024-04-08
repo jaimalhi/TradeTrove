@@ -42,7 +42,7 @@ function ViewTradies() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white px-4 py-8 pt-[100px]">
-      <h2 className="text-center text-dark-green mb-10 text-3xl font-bold">
+      <h2 className="text-center text-dark-green mb-10 text-5xl font-bold">
         List of Contractors
       </h2>
       <div className="w-full max-w-2xl ">
@@ -61,27 +61,27 @@ function ViewTradies() {
                 </h3>
                 <a
                   href={`mailto:${tradie.email}`}
-                  className="font-medium flex items-center text-blue-800"
+                  className="font-medium text-2xl flex items-center text-blue-800"
                 >
                   <MdAttachEmail className="mr-4 font-medium" />
                   {tradie.email}
                 </a>
                 <a
                   href={`tel:${tradie.phone_num}`}
-                  className="font-medium flex items-center  text-blue-800"
+                  className="font-medium text-2xl flex items-center  text-blue-800"
                 >
                   <MdLocalPhone className="mr-4 font-medium" />
                   {tradie.phone_num}
                 </a>
-                <p className="mb-1">
+                <p className="mb-1 text-2xl">
                   Experience:{" "}
-                  <span className="font-medium">
+                  <span className="font-medium text-2xl">
                     {tradie.years_experience} years
                   </span>
                 </p>
-                <p>
+                <p className="mb-1 text-2xl">
                   Skills:{" "}
-                  <span className="font-medium">
+                  <span className="font-medium text-2xl">
                     {tradie.skills.join(", ")}
                   </span>
                 </p>

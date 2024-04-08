@@ -75,23 +75,23 @@ function CustomerServices() {
           <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-4xl">
             {getInitials(customerInfo.first_name, customerInfo.last_name)}
           </div>
-          <div className="flex flex-col justify-left ml-10 ">
+          <div className="flex font-medium flex-col justify-left ml-10 ">
             <p className="text-4xl  mb-4">
               {customerInfo.first_name} {customerInfo.last_name}
             </p>
-            <div className="text-2xl flex items-center mb-4">
+            <div className="text-2xl font-medium flex items-center mb-4">
               <MdAttachEmail className="mr-4" />
               {customerInfo.email}
             </div>
             <div
-              className="text-2xl flex items-center mb-4"
+              className="text-2xl font-medium flex items-center mb-4"
             >
               <MdLocalPhone className="mr-4" />
               {customerInfo.phone_num}
             </div>
           </div>
         </div>
-        <h3 className="text-4xl text-center mt-12 mb-8">My Jobs</h3>
+        <h3 className="text-4xl  font-medium text-center mt-12 mb-8">My Jobs</h3>
         {jobs.length === 0 ? (
           <ul className="flex justify-center items-center">
             <li className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
@@ -103,7 +103,7 @@ function CustomerServices() {
             {jobs.map((job) => (
               <li
                 key={job.jid}
-                className="bg-white shadow-md rounded-lg flex flex-col p-4"
+                className="bg-white shadow-md rounded-lg border border-medium-green flex flex-col p-4"
               >
                 <span>
                   <b>Trade Type:</b> {job.trade_type}
