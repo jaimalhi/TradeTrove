@@ -4,6 +4,7 @@ import { FaWrench, FaPlus } from "react-icons/fa";
 import AddServicesBox from "./AddServiesBox";
 import axios from "axios";
 import { baseURL } from "../../utils/apiHelper";
+import { MdAttachEmail } from "react-icons/md";
 
 function TradieServicesPage() {
   const placeholderTradie = {
@@ -61,17 +62,22 @@ function TradieServicesPage() {
     <div>
       <div className="p-24 mx-auto mt-8 max-w-screen-lg">
         <div className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
-          <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-3xl">
+          <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-4xl">
             {getInitials(tradieInfo.first_name, tradieInfo.last_name)}
           </div>
-          <div className="flex flex-col justify-between ml-10">
-            <p className="text-3xl text-center">
+          <div className="flex flex-col justify-left ml-10 ">
+            <p className="text-4xl  mb-4">
               {tradieInfo.first_name} {tradieInfo.last_name}
             </p>
-            <p className="text-xl text-center">
+            <div
+              className="text-2xl flex items-center mb-4"
+            >
+              <MdAttachEmail className="mr-4" />
+              {tradieInfo.email}
+            </div>
+            <p className="text-2xl ">
               {tradieInfo.years_experience} years of experience
             </p>
-            <p className="text-xl text-center">{tradieInfo.email}</p>
           </div>
         </div>
         <h3 className="text-4xl text-center mt-12 mb-8">My Services</h3>
