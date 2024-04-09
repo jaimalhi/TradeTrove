@@ -11,6 +11,7 @@ import ViewTradies from "./components/ViewTradies/ViewTradies";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import CustomerServices from "./components/CustomerServices/CustomerServices";
+import GuardedRoute from "./GuardedRoute";
 import { BrowserRouter as Router, Switch, Route, Routes, Link } from "react-router-dom";
 
 function App() {
@@ -36,76 +37,98 @@ function App() {
    };
 
    return (
-      <Router>
-         <Routes>
-            <Route
-               path="/"
-               element={[
-                  <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,
-                  <LandingPage />,
-               ]}></Route>
-            <Route
-               path="/login"
-               element={[
-                  <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,
-                  <Login
-                     handleLoginCookie={handleLoginCookie}
-                     handleTradieCookie={handleTradieCookie}
-                  />,
-               ]}></Route>
-            <Route
-               path="/signup"
-               element={[
-                  <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,
-                  <SignupPage
-                     handleLoginCookie={handleLoginCookie}
-                     handleTradieCookie={handleTradieCookie}
-                  />,
-               ]}></Route>
-            <Route
-               path="/tradie/jobs"
-               element={[
-                  <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,
-                  <ViewJobsPage />,
-               ]}></Route>
-            <Route
-               path="/tradie/services"
-               element={[
-                  <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,
-                  <TradieServicesPage />,
-               ]}></Route>
-            <Route path="/customer/services" element={[ <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,<ViewTradies />]}></Route>
-            <Route path="/customer/jobs" element={[ <Navbar
-                     isLoggedIn={isLoggedIn}
-                     handleLogoutClicked={handleLogoutClicked}
-                     isTradie={isTradie}
-                  />,<CustomerServices />]}></Route>
-         </Routes>
-      </Router>
+     <Router>
+       <Routes>
+         <Route
+           path="/"
+           element={[
+             <Navbar
+               isLoggedIn={isLoggedIn}
+               handleLogoutClicked={handleLogoutClicked}
+               isTradie={isTradie}
+             />,
+             <LandingPage />,
+           ]}
+         ></Route>
+         <Route
+           path="/login"
+           element={<GuardedRoute isLoggedIn={isLoggedIn} />}
+         >
+           <Route
+             path="/login"
+             element={[
+               <Navbar
+                 isLoggedIn={isLoggedIn}
+                 handleLogoutClicked={handleLogoutClicked}
+                 isTradie={isTradie}
+               />,
+               <Login
+                 handleLoginCookie={handleLoginCookie}
+                 handleTradieCookie={handleTradieCookie}
+               />,
+             ]}
+           />
+         </Route>
+         <Route path="/signup" element={<GuardedRoute isLoggedIn={isLoggedIn}/>}>
+            <Route path="/signup" element = {[
+             <Navbar
+               isLoggedIn={isLoggedIn}
+               handleLogoutClicked={handleLogoutClicked}
+               isTradie={isTradie}
+             />,
+             <SignupPage
+               handleLoginCookie={handleLoginCookie}
+               handleTradieCookie={handleTradieCookie}
+             />,
+           ]}
+           />
+         </Route>
+         <Route
+           path="/tradie/jobs"
+           element={[
+             <Navbar
+               isLoggedIn={isLoggedIn}
+               handleLogoutClicked={handleLogoutClicked}
+               isTradie={isTradie}
+             />,
+             <ViewJobsPage />,
+           ]}
+         ></Route>
+         <Route
+           path="/tradie/services"
+           element={[
+             <Navbar
+               isLoggedIn={isLoggedIn}
+               handleLogoutClicked={handleLogoutClicked}
+               isTradie={isTradie}
+             />,
+             <TradieServicesPage />,
+           ]}
+         ></Route>
+         <Route
+           path="/customer/services"
+           element={[
+             <Navbar
+               isLoggedIn={isLoggedIn}
+               handleLogoutClicked={handleLogoutClicked}
+               isTradie={isTradie}
+             />,
+             <ViewTradies />,
+           ]}
+         ></Route>
+         <Route
+           path="/customer/jobs"
+           element={[
+             <Navbar
+               isLoggedIn={isLoggedIn}
+               handleLogoutClicked={handleLogoutClicked}
+               isTradie={isTradie}
+             />,
+             <CustomerServices />,
+           ]}
+         ></Route>
+       </Routes>
+     </Router>
    );
 }
 
