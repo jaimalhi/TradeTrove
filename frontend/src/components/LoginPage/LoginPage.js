@@ -68,12 +68,12 @@ const Login = ({ handleLoginCookie, handleTradieCookie }) => {
             if (response.data === true) {
               handleLoginCookie();
               handleTradieCookie("true");
-              navigate("/tradie/jobs", { replace: true });
+              navigate("/tradie/jobs");
             } else {
               console.log(response);
               handleLoginCookie();
               handleTradieCookie("false");
-              navigate("/", { replace: true });
+              navigate("/");
             }
           })
           .catch((error) => {
