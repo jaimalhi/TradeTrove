@@ -14,7 +14,7 @@ function SearchBar(props) {
                 <input
                   id="search"
                   type="text"
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-medium-green shadow-md rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   placeholder="Job title, keywords, or company"
                   value={props.searchTerm}
                   onChange={(event) =>
@@ -26,7 +26,7 @@ function SearchBar(props) {
                 <input
                   id="location"
                   type="text"
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-medium-green shadow-md rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   placeholder="City name"
                   value={props.locationTerm}
                   onChange={(event) =>

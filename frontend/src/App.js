@@ -15,18 +15,19 @@ import GuardedRoute from "./GuardedRoute";
 import { BrowserRouter as Router, Switch, Route, Routes, Link } from "react-router-dom";
 
 function App() {
-   const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get("loggedIn")); // Initial login state
-   const [isTradie, setIsTradie] = useState(Cookies.get("isTradie")); // Initial login state
+  const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get("loggedIn")); // Initial login state
+  const [isTradie, setIsTradie] = useState(Cookies.get("isTradie")); // Initial login state
 
-   const handleLoginCookie = () => {
-      setIsLoggedIn("true");
-   };
+  const handleLoginCookie = () => {
+    setIsLoggedIn("true");
+  };
 
-   const handleTradieCookie = (isTradie) => {
-      setIsTradie(isTradie);
-   };
+  const handleTradieCookie = (isTradie) => {
+    setIsTradie(isTradie);
+  };
 
-   const handleLogoutClicked = async (e) => {
+  const handleLogoutClicked = async (e) => {
+    if (e) {
       e.preventDefault();
       Cookies.set("loggedIn", "false");
       Cookies.remove("uid");

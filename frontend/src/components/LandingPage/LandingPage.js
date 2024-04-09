@@ -7,11 +7,10 @@ import Cookies from "js-cookie";
 
 function LandingPage() {
   const loggedCookie = Cookies.get("loggedIn");
-  var isLoggedIn = loggedCookie; 
-  if(loggedCookie == null){
-   isLoggedIn = "false";
+  var isLoggedIn = loggedCookie;
+  if (loggedCookie == null) {
+    isLoggedIn = "false";
   }
-
 
   return (
     <div className="landingPage pt-[20px]">
@@ -29,32 +28,33 @@ function LandingPage() {
             a seamless marketplace experience.
           </p>
         </div>
-        {
-          isLoggedIn==="false" ? (
-          <div className="absolute right-4 top-1/3 flex flex-row w-1/3 h-16 place-content-around justify-center">
-          <div className="grow">
-            <Link to="/login">
-              <button
-                type="button"
-                className=" text-white w-3/4 h-3/4 text-[#000000] bg-dark-green hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
-              >
-                Login
-              </button>
-            </Link>
+        {isLoggedIn === "false" ? (
+          <div className="absolute ml-20 top-3/4 flex flex-row w-1/3 h-16 place-content-around justify-center">
+            <div class="grow">
+              <Link to="/login">
+                <button
+                  type="button"
+                  className=" text-white w-3/4 h-3/4 text-[#000000] bg-dark-green hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
+                >
+                  Login
+                </button>
+              </Link>
+            </div>
+            <div className="grow">
+              <Link to="/signup">
+                <button
+                  type="button"
+                  className=" text-white w-3/4 h-3/4 text-[#000000] bg-dark-green hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
+                >
+                  Sign Up
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className="grow">
-            <Link to="/signup">
-              <button
-                type="button"
-                className=" text-white w-3/4 h-3/4 text-[#000000] bg-dark-green hover:bg-[#86A789] focus:ring-4 focus:outline-none focus:ring-[#739072] font-medium rounded-lg text-xl text-center dark:bg-[#739072] dark:hover:bg-[#4F6F52] dark:focus:ring-[#D2E3C8]"
-              >
-                Sign Up
-              </button>
-            </Link>
-          </div>
-      </div>) :(<></>)
-        }
-        </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
