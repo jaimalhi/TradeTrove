@@ -85,7 +85,7 @@ function SignupPage({ handleLoginCookie, handleTradieCookie }) {
                         uid = uidResponse;
                         handleLoginCookie();
                         handleTradieCookie("false");
-                        navigate("/";
+                        navigate("/");
                      }
                   })
                   .catch((error) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import LandingImage from "../../Resources/Images/LandingImage.jpg";
 import { FaWrench, FaPlus } from "react-icons/fa";
 import AddJobsBox from "./AddJobsBox";
-import ImageViewer from "./ImageViewer";
+import ImageViewer from "../../utils/ImageViewer";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { baseURL } from "../../utils/apiHelper";

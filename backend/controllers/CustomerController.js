@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models/CustomerModel");
+const bcrypt = require('bcrypt');
 
 //! ALL ENDPOINTS PREFIXED WITH /api/customers AS DEFINED IN index.js
 
@@ -49,17 +50,19 @@ router.post("/create-job", async (req, res) => {
 
 router.post("/signup", async (req, res) => {
    const { uid, email } = req.body.data.user;
-   const {firstName, lastName, password, phoneNumber,isTradesperson} = req.body.data.form;
+   const { firstName, lastName, password, phoneNumber, isTradesperson } = req.body.data.form;
+   const encryptedPassword = await bcrypt.hash(password, 10);
+   console.log("This is the encrypted pass ------------", encryptedPassword);
    try {
       //! Need to match data to the database schema
       const signUpSuccess = await db.signUp(
-       uid,
-       email,
-       password,
-       firstName,
-       lastName,
-       phoneNumber,
-       isTradesperson
+         uid,
+         email,
+         encryptedPassword,
+         firstName,
+         lastName,
+         phoneNumber,
+         isTradesperson
       );
       res.header("Access-Control-Allow-Credentials", "true");
       res.cookie("uid", uid, {
@@ -69,11 +72,11 @@ router.post("/signup", async (req, res) => {
       res.cookie("isTradie", false, {
          httpOnly: false,
          path: "/",
-       });
-       res.cookie("loggedIn", true, {
+      });
+      res.cookie("loggedIn", true, {
          httpOnly: false,
          path: "/",
-       });
+      });
       console.log("Sign up query finished successfully", signUpSuccess);
       res.json(signUpSuccess);
    } catch (err) {
