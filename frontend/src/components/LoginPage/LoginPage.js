@@ -2,13 +2,8 @@ import React from "react";
 import axios from "axios";
 
 import { useState } from "react";
-import {GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import {signInWithEmailAndPassword } from "firebase/auth";
 import { FaGoogle } from "react-icons/fa";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 import { auth } from "./firebase";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../utils/apiHelper";
@@ -16,7 +11,6 @@ import { baseURL } from "../../utils/apiHelper";
 const Login = ({ handleLoginCookie, handleTradieCookie }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
    const onSignIn = async (e) => {

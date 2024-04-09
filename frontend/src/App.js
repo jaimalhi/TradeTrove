@@ -27,15 +27,13 @@ function App() {
   };
 
   const handleLogoutClicked = async (e) => {
-    if (e) {
       e.preventDefault();
       Cookies.set("loggedIn", "false");
       Cookies.remove("uid");
       Cookies.remove("isTradie");
       setIsLoggedIn("false");
       console.log(isLoggedIn);
-      window.location.href = "/";
-   };
+}
 
    return (
      <Router>
