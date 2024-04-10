@@ -30,7 +30,7 @@ function LandingPage() {
         </div>
         {isLoggedIn === "false" ? (
           <div className="absolute ml-20 top-3/4 flex flex-row w-1/3 h-16 place-content-around justify-center">
-            <div class="grow">
+            <div className="grow">
               <Link to="/login">
                 <button
                   type="button"

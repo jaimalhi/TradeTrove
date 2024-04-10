@@ -51,7 +51,9 @@ function App() {
          ></Route>
          <Route
            path="/login"
-           element={<GuardedRoute isLoggedIn={isLoggedIn} />}
+           element={
+             <GuardedRoute isLoggedIn={isLoggedIn} protectSignIn={true} />
+           }
          >
            <Route
              path="/login"
@@ -68,64 +70,119 @@ function App() {
              ]}
            />
          </Route>
-         <Route path="/signup" element={<GuardedRoute isLoggedIn={isLoggedIn}/>}>
-            <Route path="/signup" element = {[
-             <Navbar
-               isLoggedIn={isLoggedIn}
-               handleLogoutClicked={handleLogoutClicked}
-               isTradie={isTradie}
-             />,
-             <SignupPage
-               handleLoginCookie={handleLoginCookie}
-               handleTradieCookie={handleTradieCookie}
-             />,
-           ]}
+         <Route
+           path="/signup"
+           element={
+             <GuardedRoute isLoggedIn={isLoggedIn} protectSignIn={true} />
+           }
+         >
+           <Route
+             path="/signup"
+             element={[
+               <Navbar
+                 isLoggedIn={isLoggedIn}
+                 handleLogoutClicked={handleLogoutClicked}
+                 isTradie={isTradie}
+               />,
+               <SignupPage
+                 handleLoginCookie={handleLoginCookie}
+                 handleTradieCookie={handleTradieCookie}
+               />,
+             ]}
            />
          </Route>
          <Route
            path="/tradie/jobs"
-           element={[
-             <Navbar
+           element={
+             <GuardedRoute
                isLoggedIn={isLoggedIn}
-               handleLogoutClicked={handleLogoutClicked}
+               protectSignIn={false}
                isTradie={isTradie}
-             />,
-             <ViewJobsPage />,
-           ]}
-         ></Route>
+               accessingTradiePage={true}
+             />
+           }
+         >
+           <Route
+             path="/tradie/jobs"
+             element={[
+               <Navbar
+                 isLoggedIn={isLoggedIn}
+                 handleLogoutClicked={handleLogoutClicked}
+                 isTradie={isTradie}
+               />,
+               <ViewJobsPage />,
+             ]}
+           />
+         </Route>
          <Route
            path="/tradie/services"
-           element={[
-             <Navbar
+           element={
+             <GuardedRoute
                isLoggedIn={isLoggedIn}
-               handleLogoutClicked={handleLogoutClicked}
+               protectSignIn={false}
                isTradie={isTradie}
-             />,
-             <TradieServicesPage />,
-           ]}
-         ></Route>
+               accessingTradiePage={true}
+             />
+           }
+         >
+           <Route
+             path="/tradie/services"
+             element={[
+               <Navbar
+                 isLoggedIn={isLoggedIn}
+                 handleLogoutClicked={handleLogoutClicked}
+                 isTradie={isTradie}
+               />,
+               <TradieServicesPage />,
+             ]}
+           />
+         </Route>
          <Route
            path="/customer/services"
-           element={[
-             <Navbar
+           element={
+             <GuardedRoute
                isLoggedIn={isLoggedIn}
-               handleLogoutClicked={handleLogoutClicked}
+               protectSignIn={false}
                isTradie={isTradie}
-             />,
-             <ViewTradies />,
-           ]}
-         ></Route>
+               accessingTradiePage={false}
+             />
+           }
+         >
+           <Route
+             path="/customer/services"
+             element={[
+               <Navbar
+                 isLoggedIn={isLoggedIn}
+                 handleLogoutClicked={handleLogoutClicked}
+                 isTradie={isTradie}
+               />,
+               <ViewTradies />,
+             ]}
+           />
+         </Route>
          <Route
            path="/customer/jobs"
-           element={[
-             <Navbar
+           element={
+             <GuardedRoute
                isLoggedIn={isLoggedIn}
-               handleLogoutClicked={handleLogoutClicked}
+               protectSignIn={false}
                isTradie={isTradie}
-             />,
-             <CustomerServices />,
-           ]}
-         ></Route>
+               accessingTradiePage={false}
+             />
+           }
+         >
+           <Route
+             path="/customer/jobs"
+             element={[
+               <Navbar
+                 isLoggedIn={isLoggedIn}
+                 handleLogoutClicked={handleLogoutClicked}
+                 isTradie={isTradie}
+               />,
+               <CustomerServices />,
+             ]}
+           />
+         </Route>
        </Routes>
      </Router>
    );

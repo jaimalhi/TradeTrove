@@ -6,7 +6,7 @@ import { baseURL } from "../../utils/apiHelper";
 
 async function getJobs() {
    const res = await axios.get(`${baseURL}/api/tradies/jobs`);
-   // console.log(res.data);
+   console.log(res.data);
    return res.data;
 }
 
@@ -62,6 +62,7 @@ function ViewJobsPage() {
                date={new Date(job.date).toDateString()}
                email={job.email}
                phoneNum={job.phone_num}
+               city={pincodeDict[job.postal_code]}
             />
          ))}
       </div>

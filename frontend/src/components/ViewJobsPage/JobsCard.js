@@ -12,6 +12,7 @@ function JobsCard(props) {
    const imageId = props.imageId;
    const phoneNum = props.phoneNum;
    const email = props.email;
+   const city = props.city;
 
 
    // /getJobImage/:id
@@ -35,7 +36,7 @@ function JobsCard(props) {
 
    return (
      <div>
-       <div className="p-4 mx-auto mt-8 max-w-screen-lg bg-white rounded-xl shadow-md pt-16">
+       <div className="p-4 mx-auto mt-8 max-w-screen-lg bg-white pt-16 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
          <div className="flex flex-row gap-x-5">
            {/* <img src={LandingImage} className="w-60 h-60 rounded-xl" alt="job-iamge" /> */}
            <ImageViewer apiData={imageData} />
@@ -58,7 +59,9 @@ function JobsCard(props) {
                {phoneNum}
              </a>
              <p className="text-3xl">{info}</p>
-             <p className="text-2xl">{pincode}</p>
+             <p className="text-2xl">
+               {city ? `${city}, ${pincode}` : pincode}
+             </p>
              <p className="text-2xl">Service needed on: {date}</p>
            </div>
          </div>
