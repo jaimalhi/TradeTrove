@@ -32,7 +32,7 @@ function App() {
       Cookies.remove("uid");
       Cookies.remove("isTradie");
       setIsLoggedIn("false");
-      console.log(isLoggedIn);
+      window.location.href = "/";
 }
 
    return (

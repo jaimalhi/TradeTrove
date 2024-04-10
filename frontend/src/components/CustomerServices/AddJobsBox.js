@@ -46,7 +46,7 @@ const AddJobsBox = ({ onCloseButtonClicked }) => {
           }
         )
         .then(() => {
-          console.log("received response");
+          // console.log("received response");
           onCloseButtonClicked();
         });
     } catch (error) {

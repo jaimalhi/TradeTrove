@@ -29,7 +29,7 @@ async function signUp(uid, email, password,first_name, last_name, phoneNumber, i
       phoneNumber,
       isTradesperson
    ]);
-   console.log(uidAdded.rows[0]);
+   // console.log(uidAdded.rows[0]);
    return uidAdded.rows[0].uid;
 }
 

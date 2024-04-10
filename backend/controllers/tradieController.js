@@ -58,7 +58,7 @@ router.get("/jobs", async (req, res) => {
 // Sign up tradie
 router.post("/signup", async (req, res) => {
 
-   console.log(req.body.data.form);
+   // console.log(req.body.data.form);
    const { uid, email } = req.body.data.user;
    const { firstName, lastName, password, phoneNumber, isTradesperson, yearsOfExperience, skills } =
       req.body.data.form;
@@ -103,7 +103,7 @@ router.post("/signup", async (req, res) => {
 router.get("/getTradieInfo", async (req, res) => {
    try {
       const cookieUid = req.cookies.uid;
-      console.log("cookieUid", cookieUid);
+      // console.log("cookieUid", cookieUid);
       const getTradie = await db.getTradie(cookieUid);
       res.json(getTradie);
    } catch {
@@ -114,7 +114,6 @@ router.get("/getTradieInfo", async (req, res) => {
 
 router.post("/addSkill", async (req, res) => {
    const cookieUid = req.cookies.uid;
-   console.log("cookieUid", cookieUid);
    const addSkill = await db.addSkill(cookieUid, req.body.data);
    res.send(addSkill);
 });
@@ -122,7 +121,6 @@ router.post("/addSkill", async (req, res) => {
 // get image by id
 router.get("/getJobImage/:imageId", async (req, res) => {
    const { imageId } = req.params;
-   console.log("imageId", imageId);
    try {
       const imageRes = await db.getJobImageById(imageId);
       res.json(imageRes);
@@ -131,6 +129,7 @@ router.get("/getJobImage/:imageId", async (req, res) => {
       res.status(500).send("Internal Server Error");
    }
 });
+
 
 // router.get("/jobs", async (req, res) => {
 //    try {

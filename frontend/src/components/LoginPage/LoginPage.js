@@ -36,13 +36,13 @@ const Login = ({ handleLoginCookie, handleTradieCookie }) => {
                   }
                )
                .then((response) => {
-                  console.log(response.data);
+                  // console.log(response.data);
                   if (response.data === true) {
                      handleLoginCookie();
                      handleTradieCookie("true");
                      navigate("/tradie/jobs");
                   } else {
-                     console.log(response);
+                    //  console.log(response);
                      handleLoginCookie();
                      handleTradieCookie("false");
                      navigate("/");

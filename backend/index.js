@@ -30,7 +30,7 @@ app.use(
 // static files
 app.use("/", express.static(path.join(__dirname, "./static"), { index: ["index.html"] }));
 app.use("/", (req, res, next) => {
-   console.log("req.url", req.url);
+   // console.log("req.url", req.url);
    next();
 });
 

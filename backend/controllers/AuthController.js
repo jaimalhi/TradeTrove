@@ -6,8 +6,7 @@ const db = require("../models/AuthModel");
 //! ALL ENDPOINTS PREFIXED WITH /api/auth AS DEFINED IN index.js
 
 router.post("/login", async (req, res) => {
-   // console.log("i am trying to sign in");
-   console.log(req.body);
+  //  console.log(req.body);
    const token = req.body.data.token;
    // console.log(req.body.token);
 
