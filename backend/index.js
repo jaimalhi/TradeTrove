@@ -17,7 +17,7 @@ const PORT = 8080;
 
 // Middlewares
 app.use(express.json({ limit: "5mb" })); // parsing body
-app.use(express.urlencoded({ extended: true, limit:'5mb' }));
+app.use(express.urlencoded({ extended: true, limit: "5mb" }));
 app.use(cookieParser());
 app.use(
    cors({
@@ -69,7 +69,7 @@ async function init() {
 async function initDatabaseAndStartServer() {
    try {
       await init();
-      await sample.initSampleData();
+      //   await sample.initSampleData();
       app.listen(PORT, "0.0.0.0", () => {
          console.log(`App listening at http://localhost:${PORT}`);
       });
