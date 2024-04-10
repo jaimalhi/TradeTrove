@@ -34,15 +34,32 @@ function ViewJobsPage() {
 
    useEffect(() => {
       setFilteredJobs(() =>
-         jobs.filter(
-            (j) =>
-               ((j.trade_type && j.trade_type.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                  (j.description &&
-                     j.description.toLowerCase().includes(searchTerm.toLowerCase()))) &&
-               pincodeDict[j.postal_code].toLowerCase().includes(locationTerm.toLowerCase())
-         )
+         jobs.filter((j) => {
+            const postalCode = j.postal_code;
+            const postalCodeLower = pincodeDict[postalCode]?.toLowerCase();
+            console.log(pincodeDict);
+            const searchTermLower = searchTerm.toLowerCase();
+            const locationTermLower = locationTerm.toLowerCase();
+
+            const tradeTypeMatches = j.trade_type.toLowerCase().includes(searchTermLower);
+            const descriptionMatches = j.description.toLowerCase().includes(searchTermLower);
+            const locationMatches = postalCodeLower
+               ? postalCodeLower.includes(locationTermLower)
+               : false;
+
+            if (searchTerm === "" && locationTerm === "") {
+               return true;
+            }
+            if (searchTerm === "") {
+               return locationMatches;
+            }
+            if (locationTerm === "") {
+               return tradeTypeMatches || descriptionMatches;
+            }
+            return (tradeTypeMatches || descriptionMatches) && locationMatches;
+         })
       );
-   }, [searchTerm, locationTerm]);
+   }, [searchTerm, locationTerm, jobs, pincodeDict]);
 
    return (
       <div>
