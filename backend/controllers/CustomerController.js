@@ -52,7 +52,7 @@ router.post("/signup", async (req, res) => {
    const { uid, email } = req.body.data.user;
    const { firstName, lastName, password, phoneNumber, isTradesperson } = req.body.data.form;
    const encryptedPassword = await bcrypt.hash(password, 10);
-   console.log("This is the encrypted pass ------------", encryptedPassword);
+   // console.log("This is the encrypted pass ------------", encryptedPassword);
    try {
       //! Need to match data to the database schema
       const signUpSuccess = await db.signUp(

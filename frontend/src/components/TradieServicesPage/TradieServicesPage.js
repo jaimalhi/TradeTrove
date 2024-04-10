@@ -61,7 +61,7 @@ function TradieServicesPage() {
   return (
     <div>
       <div className="p-24 mx-auto mt-8 max-w-screen-lg">
-        <div className="bg-white p-4 rounded-lg border border-medium-green shadow-md mb-6 flex items-center">
+        <div className="bg-white p-4 rounded-lg border border-medium-green shadow-md flex items-center">
           <div className="flex-none mr-10 flex items-center justify-center h-24 w-24 rounded-full bg-light-green text-white text-4xl">
             {getInitials(tradieInfo.first_name, tradieInfo.last_name)}
           </div>

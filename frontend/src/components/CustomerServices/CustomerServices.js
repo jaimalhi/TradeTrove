@@ -31,9 +31,9 @@ function CustomerServices() {
       axios.get(`${baseURL}/api/users/${uidCookie}/jobs`),
     ])
       .then(([response1, response2]) => {
-        console.log(response1);
+        // console.log(response1);
         setCustomerInfo(response1.data);
-        console.log(response2.data);
+        // console.log(response2.data);
         setJobs(response2.data);
       })
       .catch((error) => {

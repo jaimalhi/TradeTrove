@@ -29,12 +29,12 @@ function SignupPage({ handleLoginCookie, handleTradieCookie }) {
    };
    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(formData);
+      // console.log(formData);
       await createUserWithEmailAndPassword(auth, formData.email, formData.password)
          .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            console.log(user);
+            // console.log(user);
             if (formData.isTradesperson === "true") {
                axios
                   .post(

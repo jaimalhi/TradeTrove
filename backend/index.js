@@ -16,8 +16,8 @@ const app = express();
 const PORT = 8080;
 
 // Middlewares
-app.use(express.json()); // parsing body
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "5mb" })); // parsing body
+app.use(express.urlencoded({ extended: true, limit:'5mb' }));
 app.use(cookieParser());
 app.use(
    cors({
@@ -30,7 +30,7 @@ app.use(
 // static files
 app.use("/", express.static(path.join(__dirname, "./static"), { index: ["index.html"] }));
 app.use("/", (req, res, next) => {
-   console.log("req.url", req.url);
+   // console.log("req.url", req.url);
    next();
 });
 

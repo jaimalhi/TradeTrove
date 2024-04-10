@@ -57,8 +57,8 @@ async function signUp(
    const skillsArray = skills.split(",").map((skill) => skill.trim());
    const skillsPgArray = `{${skillsArray.join(",")}}`;
    await pool.query(tradie, [uidAdded.rows[0].uid, skillsPgArray, year_experience]);
-   console.log(uidAdded.rows[0]);
-   console.log("FInishes adding in tradie");
+   // console.log(uidAdded.rows[0]);
+   // console.log("FInishes adding in tradie");
    return uidAdded.rows[0].uid;
 
 }
@@ -67,7 +67,7 @@ async function getTradie(uid) {
   const joinUserTradie =
     "SELECT u.first_name,u.last_name,u.email,u.password,t.skills,t.years_experience from users u INNER JOIN tradies t ON u.uid = t.uid WHERE u.uid = $1";
   const res = await pool.query(joinUserTradie, [uid]);
-  console.log(res.rows[0]);
+//   console.log(res.rows[0]);
   return res.rows[0];
 }
 
@@ -79,12 +79,9 @@ async function addSkill(uid, skill) {
 
 async function getTradieJobs() {
 
-   let query = "SELECT j.* FROM jobs j JOIN users u ON j.uid = u.uid WHERE u.tradie = false";
+   let query = "SELECT j.* , u.email, u.phone_num FROM jobs j JOIN users u ON j.uid = u.uid WHERE u.tradie = false";
    const res = await pool.query(query);
    const jobs = res.rows;
-
-  
-
   return jobs;
 }
 
@@ -99,6 +96,7 @@ async function getJobImageById(imageId) {
    };
    return imageData;
 }
+
 
 module.exports = {
    getTradies,

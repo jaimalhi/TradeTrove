@@ -5,7 +5,6 @@ import SearchBar from "./SearchBar";
 import { baseURL } from "../../utils/apiHelper";
 
 async function getJobs() {
-   //    console.log("ATTEMPTING TO GET JOBS");
    const res = await axios.get(`${baseURL}/api/tradies/jobs`);
    console.log(res.data);
    return res.data;
@@ -61,6 +60,9 @@ function ViewJobsPage() {
                pincode={job.postal_code}
                imageId={job.image}
                date={new Date(job.date).toDateString()}
+               email={job.email}
+               phoneNum={job.phone_num}
+               city={pincodeDict[job.postal_code]}
             />
          ))}
       </div>
